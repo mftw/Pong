@@ -3,8 +3,8 @@ Kravspecs på Beach Pong v1
 
 1. Man skal kunne være 2 spillere.
 
-    - Player 1 til venstre og styre med W+S tasterne
-    - Player 2 til højre og styre med OP+NED tasterne
+    - Player 1 til venstre og styres med W+S tasterne
+    - Player 2 til højre og styres med OP+NED tasterne
 
 
 
