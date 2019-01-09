@@ -12,7 +12,7 @@ Kravspecs på Beach Pong v1
 
     - Hver spillers point på hver side af midterstregen
     - Der spilles til 11 point
-    - Meddelelse på skærmenn med vinderen og spillet resettes
+    - Meddelelse på skærmen med vinderen og spillet resettes
 
 
 
@@ -32,3 +32,18 @@ Kravspecs på Beach Pong v1
 
     - Der laves en SVG hvor elementer animeres 
     - Der laves muligvis flere SVG'er som delelementer
+
+
+
+Spil Mekanik 
+
+1. Spillet startes ved tryk på en play knap
+
+2. Bolden skydes random ud fra midten.
+    -må ikke overskride 75 grader (for at undgå at bolden staller)
+
+3. Når der scores tælles point op for den der scorede.
+
+4. Bolden forsvinder ind i målet, og der går en tid før bolden skydes ud igen (punkt 2)
+
+5. Der spilles til en af spillerne når 11 point og spillet stoppes med besked om vinderen
