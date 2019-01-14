@@ -28,13 +28,13 @@ function resetPaddles()
 }
 
 //OBJEKT MED KEYS INPUT PLAYER ONE
-var keyOption = {
+var key = {
   UPPLAYONE: "w",
-  DOWNPLAYONE: "s",
+  DOWNPLAYONE: "s"
   UPPLAYTWO: "ArrowUp",
   DOWNPLAYTWO: "ArrowDown"
 }
-//console.log(keyOption.UPPLAYONE);
+
 //OBJEKT MED KEYS INPUT PLAYER TWO
 /*var keysPlay2 = {
   UP: "ArrowUp",
@@ -43,16 +43,13 @@ var keyOption = {
 
 
 //KEYS KALDES FOR AT KUNNE BRUGE PADDLES
-function keys(pressedKey, key = keyOption)
+function keys(key)
 {
-  console.log(pressedKey);
-  let keytoUpperp1 = key.UPPLAYONE.str.toLowerCase();
-  let keytoLowerp1 = key.DOWNPLAYONE.str.toLowerCase();
-  let keytoUpperp2 = key.UPPLAYTWO.str.toLowerCase();
-  let keytoLowerp2 = key.DOWNPLAYTWO.str.toLowerCase();
 
+  let keytoLower = key.DOWN.str.toLowerCase();
+  let keytoUpper = key.UP.str.toUpperCase();
 
-  if(pressedKey == keytoUpperp1)
+  if(keys == keytoLower.DOWN || keys == keytoUpper.UP)
       {
 
         //alert("Hello You Got The W or w key");
@@ -65,9 +62,9 @@ function keys(pressedKey, key = keyOption)
               //PADDLE SKAL ØGES I HASTIGHED OG STARTE FRA MIDTEN AF SKÆRMEN
 
               player1Id.style.top = parseInt(player1Id.style.top =  + playerone + 1 + "px");
-              //console.log(playerone);
+              console.log(playerone);
               playerone=playerone+1;
-              //console.log(playerone);
+              console.log(playerone);
 
         }
 }
@@ -80,12 +77,12 @@ function paddles()
     {
       //console.log(key);
       const keyname = event.key;
-      //console.dir(event);
+      console.dir(event);
 
 
-        if(keyname)
+        if(keyname == keysPlay1 || keyname == keysPlay2)
         {
-            keys(keyname);
+            keys(keysPlay1);
         }
 
 
