@@ -3,66 +3,132 @@
 //Huske at skrive ind i koden at jeg skal bruge document.adeventlistsner.keydown() hvor key er w og s.
 callback()*/
 
-document.addEventListener("keydown", key => {
-  console.log(key);
+const player1Id = document.getElementById('left-paddle');
+const player2Id = document.getElementById('right-paddle');
+let playerone = 0;
+let playertwo = 0;
+player1Id.style.backgroundColor="red";
+player2Id.style.backgroundColor="blue";
 
-  if(key.code == 'KeyW')
-    {
-      console.log(alert("Hello You Got The W or w key"));
-    }
 
-  else if (key.code == 'KeyS')
-    {
-      console.log(alert("Hello You Got The S or s key"));
-    }
-
-    else if (key.code == 'ArrowDown')
-      {
-        console.log(alert("Hello You Got The Arrow down key"));
-      }
-      else if (key.code == 'ArrowUp')
-
-        {
-          console.log(alert("Hello You Got The ArrowUp key"));
-        }
+console.log(player1Id);
+console.log(player2Id);
 
 
 
-    else{
-      console.log(alert("not working"));
-    }
-});
-
-
-
-
-
-
-/*var paddleDirection = 0
-  , paddleSpeed = 5
-
-SVG.on(document, 'keydown', function(e) {
-  paddleDirection = e.keyCode == 40 ? 1 : e.keyCode == 38 ? -1 : 0
-  e.preventDefault()
-})
-
-SVG.on(document, 'keyup', function(e) {
-  paddleDirection = 0
-  e.preventDefault()
-})
-
-*/
-
-/*function paddle(key)
+function paddles()
 {
 
-  if (key == w)
+  if (playerone == 0 || playertwo == 0)
   {
-      alert("You pressed a key inside the input field");
+    player1Id.style.top = parseInt(player1Id.style.top = 50 +"%");
+
+    player2Id.style.top = parseInt(player2Id.style.top = 50 +"%");
+
+    alert("Player reset");
+
   }
-  else {
+
+    document.addEventListener("keydown", event =>
     {
-      "doesnt work";
-    }
-  }
-}*/
+      //console.log(key);
+      const keyname = event.key;
+      console.dir(event);
+
+
+
+
+
+          if (keyname == 'w' || keyname == 'W' ||keyname == 's' || keyname == 'S' || keyname == 'ArrowDown' || keyname == 'ArrowUp')
+          {
+
+                if(keyname == 'w' || keyname == 'W')
+                    {
+
+                      //alert("Hello You Got The W or w key");
+
+                        if(parseInt(player1Id.style.top) <= 0)
+                            {
+                              return;
+                            }
+
+                            //PADDLE SKAL ØGES I HASTIGHED OG STARTE FRA MIDTEN AF SKÆRMEN
+
+                            player1Id.style.top = parseInt(player1Id.style.top =  + playerone + 1 + "px");
+                            console.log(playerone);
+                            playerone=playerone+1;
+                            console.log(playerone);
+
+                      }
+
+                    else if (keyname == 's' || keyname == 'S')
+                      {
+                        //console.log(alert("Hello You Got The S or s key"));
+                        if(parseInt(player1Id.style.top) <= 0)
+                            {
+
+                              return;
+                            }
+
+                        //PADDLE SKAL ØGES I HASTIGHED OG STARTE FRA MIDTEN AF SKÆRMEN.
+                        player1Id.style.top = parseInt(player1Id.style.top = + playerone - 1 + "px");
+                        console.log(playerone);
+                        playerone=playerone-1;
+                        console.log(playerone);
+                      }
+
+                      else if (keyname == 'ArrowDown')
+                        {
+                          if(parseInt(player2Id.style.top) <= 0)
+                              {
+                                return;
+                              }
+
+                              //PADDLE SKAL ØGES I HASTIGHED.
+                              player2Id.style.top = parseInt(player2Id.style.top = + playertwo + 1 + "px");
+                              console.log(playertwo);
+                              playertwo=playertwo+1;
+                              console.log(playertwo);
+                        }
+
+                      else if (keyname == 'ArrowUp')
+
+                          {
+                            if(parseInt(player2Id.style.top) <= 0)
+                                {
+
+                                  return;
+                                }
+
+                            //PADDLE SKAL ØGES I HASTIGHED.
+                            player2Id.style.top = parseInt(player2Id.style.top = + playertwo - 1 + "px");
+                            console.log(playertwo);
+                            playertwo=playertwo-1;
+                            console.log(playertwo);
+
+
+                          }
+
+
+
+          }
+
+          //AUTOMATISK RESET TIL MIDTERPLACERING PÅ SKÆRMEN. MEN CTRL F5 OMGÅR DETTE OG SÆTTER PADDLES I TOP 0.
+      else
+          {
+
+            player1Id.style.top = parseInt(player1Id.style.top = 50 +"%");
+
+            player2Id.style.top = parseInt(player2Id.style.top = 50 +"%");
+
+            console.log(alert("Press w,s,ArrowUp or ArrowDown, for the paddles to move"));
+
+            playerone = 0;
+            playertwo = 0;
+
+
+          }
+
+    });
+
+}
