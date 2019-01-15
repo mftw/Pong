@@ -1,46 +1,47 @@
+
 function Input(el){
     var parent = el,
         map = {},
         intervals = {};
-   
+
     function ev_kdown(ev)
     {
         map[ev.key] = true;
         ev.preventDefault();
         return;
     }
-   
+
     function ev_kup(ev)
     {
         map[ev.key] = false;
         ev.preventDefault();
         return;
     }
-   
+
     function key_down(key)
     {
         return map[key];
     }
- 
+
     function keys_down_array(array)
-    {s
+    {
         for(var i = 0; i < array.length; i++)
             if(!key_down(array[i]))
                 return false;
- 
+
         return true;
     }
-   
+
     function keys_down_arguments()
     {
         return keys_down_array(Array.from(arguments));
     }
-   
+
     function clear()
     {
         map = {};
     }
-   
+
     function watch_loop(keylist, callback)
     {
         return function(){
@@ -48,37 +49,37 @@ function Input(el){
                 callback();
         }
     }
- 
+
     function watch(name, callback)
     {
         var keylist = Array.from(arguments).splice(2);
- 
+
         // intervals[name] = setInterval(watch_loop(keylist, callback), 1000/24);
         intervals[name] = setInterval(watch_loop(keylist, callback), 60);
     }
- 
+
     function unwatch(name)
     {
         clearInterval(intervals[name]);
         delete intervals[name];
     }
- 
+
     function detach()
     {
         parent.removeEventListener("keydown", ev_kdown);
         parent.removeEventListener("keyup", ev_kup);
     }
-   
+
     function attach()
     {
         parent.addEventListener("keydown", ev_kdown);
         parent.addEventListener("keyup", ev_kup);
     }
-   
+
     function Input()
     {
         attach();
- 
+
         return {
             key_down: key_down,
             keys_down: keys_down_arguments,
@@ -88,7 +89,7 @@ function Input(el){
             detach: detach
         };
     }
-   
+
     return Input();
 }
 
@@ -143,6 +144,7 @@ ArrowDown = input_area.watch("ArrowDown", function(){
 // }, 1000);
 
 document.addEventListener('keypress', e => console.log(e));
+// getComputedStyle
 
 // var map = {}; // You could also use an array
 // onkeydown = onkeyup = function(e){
