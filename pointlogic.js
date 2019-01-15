@@ -14,10 +14,8 @@ function reset() {
     playerTwoScore = 0;
 }
 
-function scoreBoard() {
-    leftScore.innerHTML = "<h3>" + playerOneScore + "</h3>";
-    rightScore.innerHTML = "<h3>" + playerTwoScore + "</h3>";
-}
+leftScore.innerHTML = "<h3>" + playerOneScore + "</h3>";
+rightScore.innerHTML = "<h3>" + playerTwoScore + "</h3>";
 
 
 
