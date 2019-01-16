@@ -93,16 +93,16 @@ function Input(el){
     return Input();
 }
 
-// var input_area = Input(document);
+var input_area = Input(document);
 // var i = 0;
 
 
-// input_area.watch("secret", function(){
-//     // txt.value += "FIVE ";
-//     // console.log('hey!!! ' + i)
-//     // i++;
-//     window.location = 'https://www.google.com';
-// }, "Control", "5");
+input_area.watch("secret", function(){
+    // txt.value += "FIVE ";
+    // console.log('hey!!! ' + i)
+    // i++;
+    window.location = 'https://www.google.com';
+}, "Control", "5");
 
 
 // input_area.watch("w", function(){
@@ -156,13 +156,22 @@ function Input(el){
 // }
 
 var bane = document.getElementById('bane');
-bane.centerY = bane.getBBox().width / 2;
-bane.centerX = bane.getBBox().height / 2;
+bane.centerX = bane.getBBox().width / 2;
+bane.centerY = bane.getBBox().height / 2;
+
+var bold = document.getElementById('Coconut');
+bold.ballSize = bold.firstElementChild.firstElementChild.getAttribute('ry') * 2;
+// bold.ballSize = bold.firstElementChild.firstElementChild.getAttribute('ry');
+
+console.log(bane.centerY)
+console.log(bane.centerY - bold.ballSize)
+// console.dir(bold.firstElementChild.firstElementChild.getAttribute('ry') / 2);
+// console.log(bold.ballSize);
 
 // console.log(bane.getBBox().width);
 // console.log(bane.getBBox().height);
-console.log(bane.centerY);
-console.log(bane.centerX);
+// console.log(bane.centerY);
+// console.log(bane.centerX);
 
 function moveSection(idStr, xOffset, yOffset) {
     var domElemnt = document.getElementById(idStr);
@@ -172,34 +181,65 @@ function moveSection(idStr, xOffset, yOffset) {
     }
 }
 
-function checkBounderies(x) {
+// function checkBounderies(x) {
 
-}
+// }
 
 function moveBall() {
     moveSection("Coconut", x, y);
 }
-moveSection("Coconut", 0, bane.centerX);
+
+
+// moveSection("Coconut", 0, -bane.centerY);
+// moveSection("Coconut", -bane.centerX, 0);
 
 var x = 0;
 var y = 0;
-var vx = 1;
-var vy = 1;
+var vx = -1;
+var vy = -1;
 var acc = 1;
 
-// setInterval(() => {
 
-//     moveSection("Coconut", x, y);
-//     x = x + vx * acc;
-//     y = y + vy * acc;
+var game = null;
 
-//     // Check bottom 
-//     if(y >= bane.centerY) {
-//         y = -y;
-//         console.log('hej')
-//     }
-//     // console.log('running')
-// }, 1000/60)
+
+function startGame() {
+    game = setInterval(() => {
+        moveSection("Coconut", x, y);
+        x = x + vx * acc;
+        y = y + vy * acc;
+    
+        // Check bottom 
+        if(y >= bane.centerY || y <= -bane.centerY + bold.ballSize) {
+            vy = -vy;
+            console.log('collision x')
+        } 
+            
+        if(x >= bane.centerX || x <= -bane.centerX + bold.ballSize) {
+            vx = -vx;
+            console.log('collision y')
+        }
+
+    }, 1000/60)
+    // }, 100)
+}
+
+function stopGame() {
+    clearInterval(game)
+    game = null;
+}
+
+var startBtn = document.getElementById('start-button');
+var stopBtn = document.getElementById('stop-button');
+
+startBtn.addEventListener('click', () => {
+    startGame();
+});
+
+stopBtn.addEventListener('click', () => {
+    stopGame();
+});
+
 
 
 
