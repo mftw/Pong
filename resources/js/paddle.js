@@ -36,11 +36,48 @@ var keyOption =
   UPPLAYTWO: "ArrowUp",
   DOWNPLAYTWO: "ArrowDown"
 }
+//TOP AND BOTTOM VARIBLES FOR CANVAS IS DEFINED.
+var Top = 0;
+var Bottom = 0;
 
+//INIT FUNCTION GETS TOP AND BOTTOM PARAMETERS FROM HTML.
+function init(top,bottom)
+{
+
+    Top = top;
+    Bottom = bottom;
+}
+
+//GETS THE ID FOR THE CANVAS
+//var bane = document.getElementById('canvas');
+var bane = document;
+//USES FUNCTION THAT CONTROLS THE KEYS
+var bane_input = Input(bane);
+
+//CALLS KEY FUNCTION AND PARSE INPUT TO KEY FUNCTION
+bane_input.watch('p1up', () =>{
+  keys('w', Top, Bottom)
+
+}, 'w'/*parameter must be the same as keys parameter*/);
+
+bane_input.watch('p1down', () =>{
+  keys('s', Top, Bottom)
+
+}, 's'/*parameter must be the same as keys parameter*/);
+
+bane_input.watch('p2up', () =>{
+  keys('ArrowUp', Top, Bottom)
+}, 'ArrowUp'/*parameter must be the same as keys parameter*/);
+
+bane_input.watch('p2down', () =>{
+  keys('ArrowDown', Top, Bottom)
+}, 'ArrowDown'/*parameter must be the same as keys parameter*/);
+//--------------------------------------------------
 
 //FUNCTION THAT CONTROLS PADDLE MOVEMENTS
 function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
 {
+  console.log(pressedKey);
 
   let keytoUpperp1 = key.UPPLAYONE;
 
@@ -63,9 +100,8 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
               //PADDLE SKAL ØGES I HASTIGHED OG STARTE FRA MIDTEN AF SKÆRMEN
 
               player1Id.style.top = parseInt(player1Id.style.top = +  playerone - 1 + "px");
-              console.log(playerone);
               playerone=playerone-1-1;
-              console.log(playerone);
+
 
         }
 
@@ -120,8 +156,8 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
               }
 }
 
-//FUNCTION GETS THE KEYS THAT IS PRESS ON KEAYBORD AND PARSE IT TO KEY FUNCTION
-function paddles(topBoundry, bottomBoundry)
+//FUNCTION GETS THE KEYS THAT IS PRESS ON KEYBOARD AND PARSE IT TO KEY FUNCTION
+/*function paddles(topBoundry, bottomBoundry)
 {
 
 
@@ -136,10 +172,11 @@ function paddles(topBoundry, bottomBoundry)
 
       });
 
-}
-
+}*/
+//funktionen skal erstatte paddles funktionen.
 //FUNCTION THAT ALLOWS MULTIPLE KEYPRES AT ONCE
 
+//FUNCTION GETS THE KEYS THAT IS PRESS ON KEYBOARD AND PARSE IT TO KEY FUNCTION. BOTH PLAYER 1 AND 2 CAN NOW USE THE KEYS AT THE SAME TIME.
 function Input(el)
 {
     var parent = el,
@@ -188,8 +225,13 @@ function Input(el)
     {
         return function(){
             if(keys_down_array(keylist))
+            {
                 callback();
-        }
+
+            }
+
+
+            }
     }
 
     function watch(name, callback)
