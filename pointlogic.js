@@ -33,19 +33,6 @@ function winSituation() {
 
 
 
-// p1.addEventListener("click", function() {
-//     if (counter == 11) {
-//         console.log("winner");
-//         return;
-//     }
-//     counter = countPlayerScore(counter);
-//     console.log(counter);Player1Goal
-//     playerOneScore = counter 
-//     leftScore.innerHTML = "<p>" + playerOneScore + "</p>";
-//     console.log(leftScore.innerHTML);
-
-
-// });
 
 p1.addEventListener("click", function() {
     playerOneScore.innerHTML = "<h3>" + playerOneScore + "</h3>";
