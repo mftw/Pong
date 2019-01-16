@@ -136,7 +136,7 @@
                 <ellipse class="st12" cx="980.9" cy="344.1" rx="155.8" ry="41"/>
                 <path class="st14" d="m1101.4 363.3h-241c-5.8 0-10.5-4.7-10.5-10.5v-157.2c0-5.8 4.7-10.5 10.5-10.5h241.1c5.8 0 10.5 4.7 10.5 10.5v157.2c0 5.8-4.8 10.5-10.6 10.5z"/>
                 <path class="st1" d="m1090.2 349.9h-218.6c-4.2 0-7.6-3.4-7.6-7.6v-136.5c0-4.2 3.4-7.6 7.6-7.6h218.6c4.2 0 7.6 3.4 7.6 7.6v136.4c0 4.2-3.4 7.7-7.6 7.7z"/>
-                <text class="st14 st15 st16" transform="translate(885.56 298.65)">BAR</text>
+                <text class="st14 st15 st16" id="bar-text" transform="translate(885.56 298.65)">BAR</text>
                 <rect class="st17" x="734.6" y="639.8" width="189.2" height="30.3"/>
                 <rect class="st17" x="1029.8" y="681.8" width="189.2" height="30.3"/>
                 <g>
@@ -291,13 +291,16 @@
 
     <button id="start-button">START!!!</button>
     <button id="stop-button">STOP!!!!1</button>
+    <button id="speedx2">speedUp</button>
+    <button id="speedx1">speedDown</button>
+    <button id="reverse">reverse</button>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/ModifiersPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/TextPlugin.min.js"></script>
     <script src="main.js"></script>
-    <script>
+    <script>    
         TweenMax.to('#pinaCola_x5F_right', 1, {
             rotation:40, 
             repeat: -1, 
