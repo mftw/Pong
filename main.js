@@ -93,40 +93,42 @@ function Input(el){
     return Input();
 }
 
-var input_area = Input(document.getElementById("game-area"));
-var i = 0;
+// var input_area = Input(document);
+// var i = 0;
 
 
-input_area.watch("secret", function(){
-    // txt.value += "FIVE ";
-    // console.log('hey!!! ' + i)
-    // i++;
-    window.location = 'https://www.google.com';
-}, "Control", "5");
+// input_area.watch("secret", function(){
+//     // txt.value += "FIVE ";
+//     // console.log('hey!!! ' + i)
+//     // i++;
+//     window.location = 'https://www.google.com';
+// }, "Control", "5");
 
-input_area.watch("w", function(){
-    // txt.value += "FIVE ";
-    console.log('w ' + i)
-    i++;
-}, 'w');
 
-input_area.watch("s", function(){
-    // txt.value += "FIVE ";
-    console.log('s ' + i)
-    i++;
-}, 's');
+// input_area.watch("w", function(){
+//     // txt.value += "FIVE ";
+//     console.log('w ' + i)
+//     // keys('w', top, bund);
+//     i++;
+// }, 'w');
 
-ArrowUp = input_area.watch("ArrowUp", function(){
-    // txt.value += "FIVE ";
-    console.log('ArrowUp ' + i)
-    i++;
-}, 'ArrowUp');
+// input_area.watch("s", function(){
+//     // txt.value += "FIVE ";
+//     console.log('s ' + i)
+//     i++;
+// }, 's');
 
-ArrowDown = input_area.watch("ArrowDown", function(){
-    // txt.value += "FIVE ";
-    console.log('ArrowDown ' + i)
-    i++;
-}, 'ArrowDown');
+// ArrowUp = input_area.watch("ArrowUp", function(){
+//     // txt.value += "FIVE ";
+//     console.log('ArrowUp ' + i)
+//     i++;
+// }, 'ArrowUp');
+
+// ArrowDown = input_area.watch("ArrowDown", function(){
+//     // txt.value += "FIVE ";
+//     console.log('ArrowDown ' + i)
+//     i++;
+// }, 'ArrowDown');
 
 // input_area.watch("dump", function(){
 //     console.dir(w);
@@ -143,7 +145,7 @@ ArrowDown = input_area.watch("ArrowDown", function(){
 //     console.log(ArrowDown);
 // }, 1000);
 
-document.addEventListener('keypress', e => console.log(e));
+// document.addEventListener('keypress', e => console.log(e));
 // getComputedStyle
 
 // var map = {}; // You could also use an array
@@ -152,4 +154,54 @@ document.addEventListener('keypress', e => console.log(e));
 //     map[e.keyCode] = e.type == 'keydown';
 //     /* insert conditional here */
 // }
+
+var bane = document.getElementById('bane');
+bane.centerY = bane.getBBox().width / 2;
+bane.centerX = bane.getBBox().height / 2;
+
+// console.log(bane.getBBox().width);
+// console.log(bane.getBBox().height);
+console.log(bane.centerY);
+console.log(bane.centerX);
+
+function moveSection(idStr, xOffset, yOffset) {
+    var domElemnt = document.getElementById(idStr);
+    if (domElemnt) {
+        var transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
+        domElemnt.setAttribute('transform', transformAttr);
+    }
+}
+
+function checkBounderies(x) {
+
+}
+
+function moveBall() {
+    moveSection("Coconut", x, y);
+}
+moveSection("Coconut", 0, bane.centerX);
+
+var x = 0;
+var y = 0;
+var vx = 1;
+var vy = 1;
+var acc = 1;
+
+// setInterval(() => {
+
+//     moveSection("Coconut", x, y);
+//     x = x + vx * acc;
+//     y = y + vy * acc;
+
+//     // Check bottom 
+//     if(y >= bane.centerY) {
+//         y = -y;
+//         console.log('hej')
+//     }
+//     // console.log('running')
+// }, 1000/60)
+
+
+
+
 
