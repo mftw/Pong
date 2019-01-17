@@ -2,9 +2,12 @@ var bane = document.getElementById('bane');
 bane.centerX = bane.getBBox().width / 2;
 bane.centerY = bane.getBBox().height / 2;
 
-var bold = document.getElementById('Coconut');
+var bold = document.getElementById('Cocunut');
 
-bold.ballSize = bold.firstElementChild.firstElementChild.getAttribute('ry') * 2;
+// bold.ballSize = bold.firstElementChild.firstElementChild.getAttribute('ry') * 2;
+// bold.ballSize = bold.firstElementChild.getAttribute('r') * 2;
+bold.ballSize = bold.firstElementChild.getAttribute('r');
+console.log(bold.ballSize);
 
 function moveSection(idStr, xOffset, yOffset) {
     var domElemnt;
@@ -14,7 +17,7 @@ function moveSection(idStr, xOffset, yOffset) {
         domElemnt = document.getElementById(idStr);
     }
     if (domElemnt) {
-        var transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
+        var transformAttr = ' translate(' + xOffset + ', ' + yOffset + ')';
         domElemnt.setAttribute('transform', transformAttr);
     }
 }
@@ -24,7 +27,7 @@ var game = null;
 var x = 0;
 var y = 0;
 var vx = 1;
-var vy = 1;
+var vy = -1;
 var acc = 1;
 
 function startGame() {
@@ -33,17 +36,20 @@ function startGame() {
     }
 
     game = requestInterval(() => {
-        x = x + vx * acc;
-        y = y + vy * acc;
+        // x = x + vx * acc;
+        // y = y + vy * acc;
+        x += vx * acc;
+        y += vy * acc;
     
         // Check bottom 
-        if(y >= bane.centerY || y <= -bane.centerY + bold.ballSize) {
+        // if(y >= bane.centerY || y <= -bane.centerY + bold.ballSize) {
+        if(y >= (bane.centerY - bold.ballSize) || y <=  bold.ballSize - bane.centerY) {
             vy = -vy;
             // console.log('collision x')
         } 
             
-        if(x >= bane.centerX || x <= -bane.centerX + (bold.ballSize / 2)) {
-        // if(x >= bane.centerX || x <= -bane.centerX + bold.ballSize) {
+        
+        if(x >= bane.centerX || x <= bold.ballSize - bane.centerX ) {
             vx = -vx;
             // console.log('collision y')
         }
@@ -57,6 +63,10 @@ function startGame() {
 
 function stopGame() {
     // clearInterval(game)
+    if(game === null) {
+        return;
+    }
+
     clearRequestInterval(game);
     game = null;
 }
@@ -136,7 +146,7 @@ console.log(tmpX);
 console.log(tmpY);
 console.log(tmpC);
 console.log(sinV);
-console.log(angL);
+console.log(angle);
 
 
 
