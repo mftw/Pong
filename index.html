@@ -539,22 +539,23 @@ var tl1 = new TimelineMax({
 
 tl.set('#pinaCola_x5F_right',{
 	transformOrigin: 'bottom center', 
+	rotation: -10,
 	ease: Power4.easeInOut})
 .to('#pinaCola_x5F_right', 3, {
-	rotation: -10,
+	rotation: 10,
+	yoyo: true,
 	// transformOrigin: 'bottom center',
  
 	ease: Power1.easeInOut})
-.to('#pinaCola_x5F_right',3,{
-	rotation: 10,
-	// transformOrigin: 'bottom center',
+// .to('#pinaCola_x5F_right',3,{
+// 	// transformOrigin: 'bottom center',
   
-	ease: Power1.easeInOut})
-.to('#pinaCola_x5F_right',3,{
-	// transformOrigin: 'center center',
-	 yoyo:true,
-	ease: Power4.easeInOut
-});
+// 	ease: Power1.easeInOut})
+// .to('#pinaCola_x5F_right',3,{
+// 	// transformOrigin: 'center center',
+// 	 yoyo:true,
+// 	ease: Power4.easeInOut
+// });
 
 // tl1.set('#pinaCola_x5F_left',{
 // 	transformOrigin: 'bottom center', 
