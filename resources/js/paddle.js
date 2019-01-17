@@ -87,7 +87,7 @@ bane_input.watch('p2down', () =>{
 }, 'ArrowDown'/*parameter must be the same as keys parameter*/);
 //--------------------------------------------------
 
-const topBoundry = 0 + "%";
+const topBoundry = 1 + "%";
 const bottomBoundry = 100 + "%";
 //FUNCTION THAT CONTROLS PADDLE MOVEMENTS
 function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
@@ -110,9 +110,12 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
       {
 
               //PADDLES STOPPER NÅR DEN NÅR TOP ELLER BUND OG KAN IKKE KØRER TILBAGE
+
           if(parseInt(player1Id.getAttribute("y")) <= topBoundry)
               {
+
                 return;
+
               }
 
               //PADDLE SKAL ØGES I HASTIGHED OG STARTE FRA MIDTEN AF SKÆRMEN
@@ -121,9 +124,9 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
               let num = parseFloat(player1Id.getAttribute("y"));
               console.log(num);
               let numplus = num-1+"%";
-              console.log(numplus);
+              //console.log(numplus);
               player1Id.setAttribute('y', numplus);
-              console.log(player1Id);
+              //console.log(player1Id);
 
 
 
