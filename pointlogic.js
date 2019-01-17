@@ -4,10 +4,10 @@ var leftScore = document.getElementById("leftScore");
 var rightScore = document.getElementById("rightScore");
 var p1 = document.getElementById("player1");
 var p2 = document.getElementById("player2");
-
+var winnerScore = 2;
 
 function countPlayerScore(counter, win) {
-    if(counter == 10) {
+    if(counter == winnerScore - 1) {
         console.log("winner: " + win);
         winSituation(win);
     }
@@ -22,23 +22,22 @@ function scoreBoard() {
 function resetScoreboard() {
     playerOneScore = 0;
     playerTwoScore = 0;
+    resetWinAni();
+    winnerSong(false);
     scoreBoard();
-    svg.style.display = "none";
 }
 
 function winSituation(win) {
     console.log("Whatever der nu sker når en vinder");
     bg(win);
+    winnerSong();
 }
-
-
-
 
 
 
 p1.addEventListener("click", function() {
     playerOneScore.innerHTML = "<h3>" + playerOneScore + "</h3>";
-    if(playerOneScore == 11) {
+    if(playerOneScore == winnerScore) {
         return;
     }
     playerOneScore = countPlayerScore(playerOneScore, "player1");
@@ -46,7 +45,7 @@ p1.addEventListener("click", function() {
 });
 
 p2.addEventListener("click", function() {
-    if(playerTwoScore == 11) {
+    if(playerTwoScore == winnerScore) {
         return;
     }
     playerTwoScore = countPlayerScore(playerTwoScore, "player2");
@@ -56,3 +55,15 @@ p2.addEventListener("click", function() {
 document.getElementById("reset").addEventListener("click", function() {
     resetScoreboard();
 });
+
+var audio = new Audio('/goe.mp3');
+function winnerSong(reset = true) {
+    if(reset === false) {
+        // delete audio;
+        audio.pause();
+        audio = null;
+        return;
+    }
+    audio = new Audio('/goe.mp3');
+    audio.play();
+}
