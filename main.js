@@ -7,15 +7,16 @@ var bold = document.getElementById('Coconut');
 bold.ballSize = bold.firstElementChild.firstElementChild.getAttribute('ry') * 2;
 
 function moveSection(idStr, xOffset, yOffset) {
-    var domElemnt = document.getElementById(idStr);
+    var domElemnt;
+    if(typeof idStr === 'object') {
+        domElemnt = idStr;
+    } else {
+        domElemnt = document.getElementById(idStr);
+    }
     if (domElemnt) {
         var transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
         domElemnt.setAttribute('transform', transformAttr);
     }
-}
-
-function moveBall() {
-    moveSection("Coconut", x, y);
 }
 
 
@@ -49,9 +50,10 @@ function startGame() {
             console.log('collision y')
         }
 
-        moveSection("Coconut", x, y);
+        // moveSection("Coconut", x, y);
+        moveSection(bold, x, y);
 
-    }, 1000/60)
+    })
     // }, 100)
 }
 
@@ -70,10 +72,12 @@ var revBtn = document.getElementById('reverse');
 startBtn.addEventListener('click', () => {
     startGame();
     console.log(game)
+    TweenMax.resumeAll() 
 });
 
 stopBtn.addEventListener('click', () => {
     stopGame();
+    TweenMax.pauseAll() 
 });
 
 speedx1Btn.addEventListener('click', () => {
@@ -81,7 +85,7 @@ speedx1Btn.addEventListener('click', () => {
 });
 
 speedx2Btn.addEventListener('click', () => {
-    acc += 2;
+    acc += 1;
 });
 
 revBtn.addEventListener('click', () => {
