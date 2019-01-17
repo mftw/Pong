@@ -23,8 +23,8 @@ function moveSection(idStr, xOffset, yOffset) {
 var game = null;
 var x = 0;
 var y = 0;
-var vx = -1;
-var vy = -1;
+var vx = 1;
+var vy = 1;
 var acc = 1;
 
 function startGame() {
@@ -35,19 +35,17 @@ function startGame() {
     game = requestInterval(() => {
         x = x + vx * acc;
         y = y + vy * acc;
-        // var thisLoop = new Date;
-        // var fps = 1000 / (thisLoop - lastLoop);
     
         // Check bottom 
         if(y >= bane.centerY || y <= -bane.centerY + bold.ballSize) {
             vy = -vy;
-            console.log('collision x')
+            // console.log('collision x')
         } 
             
         if(x >= bane.centerX || x <= -bane.centerX + (bold.ballSize / 2)) {
         // if(x >= bane.centerX || x <= -bane.centerX + bold.ballSize) {
             vx = -vx;
-            console.log('collision y')
+            // console.log('collision y')
         }
 
         // moveSection("Coconut", x, y);
@@ -117,6 +115,19 @@ window.clearRequestInterval = function(handle) {
     clearInterval(handle);
 };
 
+
+// var tmpX = Math.random() * 2 - 1;
+// var tmpY = Math.random() * 2 - 1;
+
+var tmpX = 4;
+var tmpY = 3;
+
+// var tmpC = Math.sqrt((tmpX ^ 2) + (tmpY ^ 2));
+var tmpC = Math.sqrt(Math.pow(tmpX, 2) + Math.pow(tmpY, 2));
+
+console.log(tmpX);
+console.log(tmpY);
+console.log(tmpC);
 
 
 
