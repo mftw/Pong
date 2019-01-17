@@ -544,8 +544,15 @@ tl.set('#pinaCola_x5F_right',{
 .to('#pinaCola_x5F_right', 3, {
 	rotation: 10,
 	yoyo: true,
-	// transformOrigin: 'bottom center',
- 
+	ease: Power1.easeInOut})
+	
+tl1.set('#pinaCola_x5F_left',{
+	transformOrigin: 'bottom center', 
+	rotation: -10,
+	ease: Power4.easeInOut})
+.to('#pinaCola_x5F_left', 3, {
+	rotation: 10,
+	yoyo: true,
 	ease: Power1.easeInOut})
 // .to('#pinaCola_x5F_right',3,{
 // 	// transformOrigin: 'bottom center',
