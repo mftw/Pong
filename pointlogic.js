@@ -9,7 +9,7 @@ var p2 = document.getElementById("player2");
 function countPlayerScore(counter, win) {
     if(counter == 10) {
         console.log("winner: " + win);
-        winSituation();
+        winSituation(win);
     }
     return counter + 1;
 }
@@ -23,10 +23,12 @@ function resetScoreboard() {
     playerOneScore = 0;
     playerTwoScore = 0;
     scoreBoard();
+    svg.style.display = "none";
 }
 
-function winSituation() {
+function winSituation(win) {
     console.log("Whatever der nu sker når en vinder");
+    bg(win);
 }
 
 
