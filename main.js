@@ -69,7 +69,7 @@ var revBtn = document.getElementById('reverse');
 
 startBtn.addEventListener('click', () => {
     startGame();
-    console.log(game)
+    // console.log(game)
     TweenMax.resumeAll() 
 });
 
@@ -118,16 +118,25 @@ window.clearRequestInterval = function(handle) {
 
 // var tmpX = Math.random() * 2 - 1;
 // var tmpY = Math.random() * 2 - 1;
-
 var tmpX = 4;
 var tmpY = 3;
 
 // var tmpC = Math.sqrt((tmpX ^ 2) + (tmpY ^ 2));
-var tmpC = Math.sqrt(Math.pow(tmpX, 2) + Math.pow(tmpY, 2));
+var tmpC = Math.sqrt( Math.pow(tmpX, 2) + Math.pow(tmpY, 2) );
+
+// var sinV = Math.sin( tmpC / tmpX);
+// var sinV = tmpC / tmpX;
+var sinV = tmpY / tmpC;
+
+// var angle = Math.sin(sinV)*(180/Math.PI);
+var angle = Math.sin(sinV) * (180/Math.PI);
+
 
 console.log(tmpX);
 console.log(tmpY);
 console.log(tmpC);
+console.log(sinV);
+console.log(angL);
 
 
 
