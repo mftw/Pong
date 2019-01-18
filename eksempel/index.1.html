@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="image/svg+xml" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SVG</title>
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="loaderstyle.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Open Sans';
+            background-color: aliceblue;
+        }
+
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 400px;
+            width: 400px;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <svg class="loader" width="600.07" height="600.07" version="1.1" viewBox="0 0 158.77 158.77" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <radialGradient id="radialGradient1335" cx="-24.743" cy="198.13" r="68.612" gradientTransform="translate(104.13 -118.74)" gradientUnits="userSpaceOnUse">
+                <stop id="stop1" style="stop-color:#ffffff;stop-opacity:0" offset="0"/>
+                <stop id="stop2" style="stop-color:#00ff00" offset="1"/>
+            </radialGradient>
+
+            
+
+        </defs>
+        <circle id="circ1" cx="79.493" cy="79.276" r="79.294" style="fill:none;paint-order:normal;stroke-dasharray:12.70000006, 12.70000006;stroke-dashoffset:5.2917;stroke-linecap:round;stroke-miterlimit:0;stroke-width:.52917;stroke:#000000"/>
+        <path id="outerCircle" d="m147.6 79.384a68.214 68.214 0 0 1-68.214 68.214 68.214 68.214 0 0 1-68.214-68.214 68.214 68.214 0 0 1 68.214-68.214 68.214 68.214 0 0 1 68.214 68.214z" style="fill:url(#radialGradient1335);paint-order:normal;stroke-linecap:round;stroke-miterlimit:0;stroke-width:.5;stroke:#000000"/>
+
+        <path id='initials' d="m48.195 109.19v-50.27l18.52 23.81 15.87-23.81v50.27-23.81l31.026-33.944-20.391 22.774 19.622 34.178" style="fill:none;stroke-width:6.8842;stroke:#000000"/>
+        <filter >
+            <feGaussianBlur id="pictureFilter" stdDeviation="0" />
+        </filter>
+
+    </svg>
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+
+    <script>
+        var element = document.getElementById('circ1');
+        var initials = document.getElementById('initials');
+        var initialsLength = initials.getTotalLength();
+
+        var gradientGreen = document.getElementById('stop2');
+        var gradientWhite = document.getElementById('stop1');
+        var outerCircle = document.getElementById('outerCircle');
+        var outerCircleLength = outerCircle.getTotalLength();
+
+        
+
+        var tl = new TimelineMax();
+        
+
+        TweenMax.to(element, 5, {
+            opacity: 0,
+        })
+
+        TweenMax.to(element, 5, {
+            rotation: 360,
+            transformOrigin: 'center center',
+
+        })
+
+        TweenMax.to(gradientGreen, 5, {
+            stopColor: '#000000'
+            // attr: {
+            // }
+        })
+
+        TweenMax.to(gradientWhite, 5, {
+            // stopColor: '#ffffff'
+            attr: {
+                offset: '1'
+            },
+            onComplete: () => fuck(),
+        })
+
+        TweenMax.set(initials, {
+            strokeDasharray: initialsLength
+        });
+
+        TweenMax.fromTo(initials, 3, {
+            strokeDashoffset: initialsLength
+        }, {
+            strokeDashoffset:0
+        });
+
+
+    function fuck() {
+
+        TweenMax.set(outerCircle, {
+            rotation: -90,
+            transformOrigin: 'center center',
+            strokeDasharray: outerCircleLength,
+        });
+
+
+        TweenMax.to(outerCircle, 3, {
+                strokeDasharray: outerCircleLength,
+                strokeDashoffset: outerCircleLength,
+                // ease: Elastic. easeOut.config( 1, 0.3),
+                // ease: SteppedEase.config( 12),
+                // ease: Power4. easeOut,
+                // ease:Circ. easeOut,
+                // ease: SlowMo.ease.config( 0.7, 0.7, false),
+                ease: Expo. easeOut,
+                onComplete: () => you()
+            }
+        )
+    }
+
+
+    function you() {
+        // console.log('you')
+        TweenMax.set(outerCircle, {
+            strokeWidth: 0,
+        })
+    }
+
+    </script>
+</body>
+</html>
