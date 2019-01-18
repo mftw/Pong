@@ -72,7 +72,6 @@ function startGame() {
         }
 
         moveSection(bold, x, y);
-
     })
 }
 
@@ -90,7 +89,6 @@ function resetGame() {
     initGame();
     moveSection(bold, x, y);
 }
-
 
 var startBtn = document.getElementById('start-button');
 var stopBtn = document.getElementById('stop-button');
@@ -161,7 +159,6 @@ function getOrCreateContext() {
     return context;
 }
 
-var isStarted = false;
 
 
 /**
@@ -200,6 +197,9 @@ function collisionSound(sound = '/resources/audio/pop.mp3') {
     var audio = new Audio(sound);
     audio.play();
 }
+
+var bgMusic = new Audio('./resources/audio/bg-music.mp3');
+
 
 // var tmpX = Math.random() * 2 - 1;
 // var tmpY = Math.random() * 2 - 1;
