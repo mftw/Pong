@@ -1,41 +1,40 @@
 //SAVES THE ID OF LEFT PADDLE TO A CONSTANT
 
-const player1Id = document.getElementById('paddleLeft'); console.log(player1Id);
+const player1Id = document.getElementById('paddleLeft');
+console.log(player1Id);
 
 //SAVES THE ID OF RIGHT PADDLE TO A CONSTANT PLAYER1ID
 const player2Id = document.getElementById('paddleRight');
 
 
 //EXTRACT THE STRING POSTION OF PADDLE FOR PLAYER ONE AND CONVERTS THE STRING TO A FLOAT
-let playerone =  player1Id.getAttribute("y","x");
+let playerone = player1Id.getAttribute("y", "x");
 
 
 //EXTRACT THE STRING POSTION OF PADDLE FOR PLAYER TWO AND CONVERTS THE STRING TO A FLOAT
-let playertwo =  player2Id.getAttribute("y","x");
+let playertwo = player2Id.getAttribute("y", "x");
 
 
 //MOVES THE PADDLES ON X AXE
-player1Id.setAttribute('x',381);
+player1Id.setAttribute('x', 381);
 
 player2Id.setAttribute('x', 1549);
 
 //FUNCTION RESETS THE PADDLES TO THE CENTER OF THE VIEWPORT
-function resetPaddles()
-{
+function resetPaddles() {
 
-        player1Id.setAttribute('y', 50 + "%");
-
-
-        player2Id.setAttribute('y', 50 + "%");
+  player1Id.setAttribute('y', 50 + "%");
 
 
+  player2Id.setAttribute('y', 50 + "%");
 
-        alert("Player reset");
+
+
+  alert("Player reset");
 }
 
 //KEYBOARD INPUT TO USE FOR PLAYER ONE AND PLAYER TWO PADDLES, IS SAVED TO A VARIABLE AS AN OBJECT
-var keyOption =
-{
+var keyOption = {
   UPPLAYONE: "w",
   DOWNPLAYONE: "s",
   UPPLAYTWO: "ArrowUp",
@@ -45,11 +44,10 @@ var Top = 0;
 var Bottom = 0;
 
 //INIT FUNCTION GETS TOP AND BOTTOM PARAMETERS FROM HTML.
-function init(top,bottom)
-{
+function init(top, bottom) {
 
-    Top = top;
-    Bottom = bottom;
+  Top = top;
+  Bottom = bottom;
 
 }
 
@@ -61,23 +59,23 @@ var bane = document;
 var bane_input = Input(bane);
 
 //CALLS KEY FUNCTION AND PARSE INPUT TO KEY FUNCTION
-bane_input.watch('p1up', () =>{
+bane_input.watch('p1up', () => {
   keys('w', Top, Bottom)
 
-}, 'w'/*parameter must be the same as keys parameter*/);
+}, 'w' /*parameter must be the same as keys parameter*/ );
 
-bane_input.watch('p1down', () =>{
+bane_input.watch('p1down', () => {
   keys('s', Top, Bottom)
 
-}, 's'/*parameter must be the same as keys parameter*/);
+}, 's' /*parameter must be the same as keys parameter*/ );
 
-bane_input.watch('p2up', () =>{
+bane_input.watch('p2up', () => {
   keys('ArrowUp', Top, Bottom)
-}, 'ArrowUp'/*parameter must be the same as keys parameter*/);
+}, 'ArrowUp' /*parameter must be the same as keys parameter*/ );
 
-bane_input.watch('p2down', () =>{
+bane_input.watch('p2down', () => {
   keys('ArrowDown', Top, Bottom)
-}, 'ArrowDown'/*parameter must be the same as keys parameter*/);
+}, 'ArrowDown' /*parameter must be the same as keys parameter*/ );
 //--------------------------------------------------
 
 //VARIABLE THAT SAVES THE HALF OF THE HEIGHT OF THE LANE FOR THE COCONUT BALL
@@ -102,8 +100,7 @@ var bottomBoundryP2 = 245;
 
 
 //FUNCTION THAT CONTROLS PADDLE MOVEMENTS
-function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
-{
+function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption) {
 
 
   let keytoUpperp1 = key.UPPLAYONE;
@@ -118,202 +115,173 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
 
 
   //PLAYER ONE MOVE UP PADDLE
-  if(pressedKey == keytoUpperp1)
-      {
+  if (pressedKey == keytoUpperp1) {
 
-              console.log(pressedKey);
+    console.log(pressedKey);
 
-              paddleP1Pos -= 10;
+    paddleP1Pos -= 10;
 
-            if( paddleP1Pos >= topBoundryP1)
-              {
-                moveSection(player1Id, 0, paddleP1Pos);
-              }
+    if (paddleP1Pos >= topBoundryP1) {
+      moveSection(player1Id, 0, paddleP1Pos);
+    } else {
 
-              else {
+      paddleP1Pos = -245;
 
-                paddleP1Pos = -245;
+      return;
+    }
 
-                return;
-              }
+  }
 
-        }
+  //PLAYER ONE MOVE DOWN PADDLE
+  if (pressedKey == keytoLowerp1)
 
-          //PLAYER ONE MOVE DOWN PADDLE
-          if(pressedKey == keytoLowerp1)
+  {
 
-          {
+    console.log(pressedKey);
 
-                  console.log(pressedKey);
+    paddleP1Pos += 10;
 
-                  paddleP1Pos += 10;
+    if (paddleP1Pos <= bottomBoundryP1) {
+      moveSection(player1Id, 0, paddleP1Pos);
+    } else {
 
-                if( paddleP1Pos <= bottomBoundryP1)
-                  {
-                    moveSection(player1Id, 0, paddleP1Pos);
-                  }
-
-                  else {
-
-                    paddleP1Pos = 228;
-                    return;
-                  }
-            }
+      paddleP1Pos = 228;
+      return;
+    }
+  }
 
 
-           //PLAYER TWO MOVE UP PADDLE
-           if(pressedKey == keytoUpperp2)
-             {
+  //PLAYER TWO MOVE UP PADDLE
+  if (pressedKey == keytoUpperp2) {
 
-               console.log(pressedKey);
+    console.log(pressedKey);
 
-               paddleP2Pos -= 10;
+    paddleP2Pos -= 10;
 
-             if( paddleP2Pos >= topBoundryP2 )
-               {
-                 moveSection(player2Id, 0, paddleP2Pos);
-               }
+    if (paddleP2Pos >= topBoundryP2) {
+      moveSection(player2Id, 0, paddleP2Pos);
+    } else {
 
-               else {
-
-                 paddleP2Pos = -245;
-                 return;
-               }
+      paddleP2Pos = -245;
+      return;
+    }
 
 
-              }
+  }
 
 
-            //PLAYER TWO MOVE DOWN PADDLE
-            if(pressedKey == keytoLowerp2)
-              {
+  //PLAYER TWO MOVE DOWN PADDLE
+  if (pressedKey == keytoLowerp2) {
 
-                paddleP2Pos += 10;
+    paddleP2Pos += 10;
 
-              if(paddleP2Pos <= bottomBoundryP2)
-                {
-                  moveSection(player2Id, 0, paddleP2Pos);
-                }
+    if (paddleP2Pos <= bottomBoundryP2) {
+      moveSection(player2Id, 0, paddleP2Pos);
+    } else {
 
-                else {
+      paddleP2Pos = paddleP2Pos - 1;
+      return;
+    }
 
-                  paddleP2Pos = paddleP2Pos -1;
-                  return;
-                }
-
-              }
+  }
 }
 
 function moveSection(idStr, xOffset, yOffset) {
-    var domElemnt;
-    if(typeof idStr === 'object') {
-        domElemnt = idStr;
-    } else {
-        domElemnt = document.getElementById(idStr);
-    }
-    if (domElemnt) {
-        var transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
-        domElemnt.setAttribute('transform', transformAttr);
-    }
+  var domElemnt;
+  if (typeof idStr === 'object') {
+    domElemnt = idStr;
+  } else {
+    domElemnt = document.getElementById(idStr);
+  }
+  if (domElemnt) {
+    var transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
+    domElemnt.setAttribute('transform', transformAttr);
+  }
 }
 
 //FUNCTION GETS THE KEYS THAT IS PRESS ON KEYBOARD AND PARSE IT TO KEY FUNCTION
-function Input(el)
-{
-    var parent = el,
-        map = {},
-        intervals = {};
+function Input(el) {
+  var parent = el,
+    map = {},
+    intervals = {};
 
-    function ev_kdown(ev)
-    {
-        map[ev.key] = true;
-        ev.preventDefault();
-        return;
+  function ev_kdown(ev) {
+    map[ev.key] = true;
+    ev.preventDefault();
+    return;
+  }
+
+  function ev_kup(ev) {
+    map[ev.key] = false;
+    ev.preventDefault();
+    return;
+  }
+
+  function key_down(key) {
+    return map[key];
+  }
+
+  function keys_down_array(array) {
+    for (var i = 0; i < array.length; i++)
+      if (!key_down(array[i]))
+        return false;
+
+    return true;
+  }
+
+  function keys_down_arguments() {
+    return keys_down_array(Array.from(arguments));
+  }
+
+  function clear() {
+    map = {};
+  }
+
+  function watch_loop(keylist, callback) {
+    return function() {
+      if (keys_down_array(keylist)) {
+        callback();
+
+      }
+
+
     }
+  }
 
-    function ev_kup(ev)
-    {
-        map[ev.key] = false;
-        ev.preventDefault();
-        return;
-    }
+  function watch(name, callback) {
+    var keylist = Array.from(arguments).splice(2);
 
-    function key_down(key)
-    {
-        return map[key];
-    }
+    // intervals[name] = setInterval(watch_loop(keylist, callback), 1000/24);
+    intervals[name] = setInterval(watch_loop(keylist, callback), 60);
+  }
 
-    function keys_down_array(array)
-    {
-        for(var i = 0; i < array.length; i++)
-            if(!key_down(array[i]))
-                return false;
+  function unwatch(name) {
+    clearInterval(intervals[name]);
+    delete intervals[name];
+  }
 
-        return true;
-    }
+  function detach() {
+    parent.removeEventListener("keydown", ev_kdown);
+    parent.removeEventListener("keyup", ev_kup);
+  }
 
-    function keys_down_arguments()
-    {
-        return keys_down_array(Array.from(arguments));
-    }
+  function attach() {
+    parent.addEventListener("keydown", ev_kdown);
+    parent.addEventListener("keyup", ev_kup);
+  }
 
-    function clear()
-    {
-        map = {};
-    }
+  function Input() {
+    attach();
 
-    function watch_loop(keylist, callback)
-    {
-        return function(){
-            if(keys_down_array(keylist))
-            {
-                callback();
+    return {
+      key_down: key_down,
+      keys_down: keys_down_arguments,
+      watch: watch,
+      unwatch: unwatch,
+      clear: clear,
+      detach: detach
+    };
+  }
 
-            }
-
-
-            }
-    }
-
-    function watch(name, callback)
-    {
-        var keylist = Array.from(arguments).splice(2);
-
-        // intervals[name] = setInterval(watch_loop(keylist, callback), 1000/24);
-        intervals[name] = setInterval(watch_loop(keylist, callback), 60);
-    }
-
-    function unwatch(name)
-    {
-        clearInterval(intervals[name]);
-        delete intervals[name];
-    }
-
-    function detach()
-    {
-        parent.removeEventListener("keydown", ev_kdown);
-        parent.removeEventListener("keyup", ev_kup);
-    }
-
-    function attach()
-    {
-        parent.addEventListener("keydown", ev_kdown);
-        parent.addEventListener("keyup", ev_kup);
-    }
-
-    function Input()
-    {
-        attach();
-
-        return {
-            key_down: key_down,
-            keys_down: keys_down_arguments,
-            watch: watch,
-            unwatch: unwatch,
-            clear: clear,
-            detach: detach
-        };
-    }
-
-    return Input();
+  return Input();
 }
