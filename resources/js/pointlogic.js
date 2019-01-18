@@ -54,13 +54,16 @@ p2.addEventListener("click", function() {
 
 document.getElementById("reset").addEventListener("click", function() {
     resetScoreboard();
+    resetGame()
 });
 
 var audio = new Audio('./resources/audio/goe.mp3');
 function winnerSong(reset = true) {
     if(reset === false) {
         // delete audio;
-        audio.pause();
+        if(audio) {
+            audio.pause();
+        }
         audio = null;
         return;
     }

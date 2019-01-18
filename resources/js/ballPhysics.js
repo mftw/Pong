@@ -27,14 +27,24 @@ function moveSection(idStr, xOffset, yOffset, extras = '') {
 var game = null;
 var x = 0;
 var y = 0;
-var vx = -1;
-var vy = -1;
+var vx = Math.random() * 2 - 1;
+var vy = Math.random() * 2 - 1;
 var acc = 5;
+
+var gameStarted = false;
 
 var collisionSoundURL = './resources/audio/pop.mp3';
 // var collisionSoundURL = './resources/audio/basketBall.mp3';
 // var collisionSoundURL = './resources/audio/basketBall2.mp3';
 // var collisionSoundURL = './resources/audio/pingPongBall.mp3';
+
+function initGame() {
+    x = 0;
+    y = 0;
+    vx = Math.random() * 2 - 1;
+    vy = Math.random() * 2 - 1;
+    acc = 5;
+}
 
 function startGame() {
 
@@ -74,6 +84,13 @@ function stopGame() {
     clearRequestInterval(game);
     game = null;
 }
+
+function resetGame() {
+    stopGame();
+    initGame();
+    moveSection(bold, x, y);
+}
+
 
 var startBtn = document.getElementById('start-button');
 var stopBtn = document.getElementById('stop-button');
