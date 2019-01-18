@@ -21,7 +21,7 @@ function moveSection(idStr, xOffset, yOffset, extras = '') {
         var transformAttr = ' translate(' + xOffset + ', ' + yOffset + ')' + ' ' + extras;
         domElemnt.setAttribute('transform', transformAttr);
     }
-}
+} 
 
 
 var game = null;
@@ -31,12 +31,13 @@ var vx = -1;
 var vy = -1;
 var acc = 5;
 
-var collisionSoundURL = './pop.mp3';
-// var collisionSoundURL = './basketBall.mp3';
-// var collisionSoundURL = './basketBall2.mp3';
-// var collisionSoundURL = './pingPongBall.mp3';
+var collisionSoundURL = './resources/audio/pop.mp3';
+// var collisionSoundURL = './resources/audio/basketBall.mp3';
+// var collisionSoundURL = './resources/audio/basketBall2.mp3';
+// var collisionSoundURL = './resources/audio/pingPongBall.mp3';
 
 function startGame() {
+
     if (game !== null) {
         return;
     }
@@ -51,7 +52,6 @@ function startGame() {
             vy = -vy;
             collisionSound(collisionSoundURL);
             // playBeep(200);
-            // console.log('collision x')
         } 
 
         // Check left and right collisions
@@ -179,7 +179,7 @@ function playBeep(freq = 400, time = 100, type = 'square') {
 }
 
 // var audio = null;
-function collisionSound(sound = '/pop.mp3') {
+function collisionSound(sound = '/resources/audio/pop.mp3') {
     var audio = new Audio(sound);
     audio.play();
 }

@@ -6,17 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="resources/css/main.css" />
 </head>
 
 <body>
-
-    <!-- <div class="scaler" id="game-area" contenteditable="true">
-
-        
-
-    </div> -->
-
 
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" 
         y="0px" viewBox="0 0 1981 1102" style="enable-background:new 0 0 1981 1102;" xml:space="preserve" class="full-game">
@@ -574,20 +567,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/ModifiersPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/TextPlugin.min.js"></script>
-    <script src="main.js"></script>
+    <script src="./resources/js/ballPhysics.js"></script>
     <script>
-        // TweenMax.to('#pinaCola_x5F_right', 1, {
-        //     rotation: 40,
-        //     repeat: -1,
-        //     yoyo: true,
-        // });
-
-        // TweenMax.to('#pinaCola_x5F_left', 1, {
-        //     rotation: -40,
-        //     repeat: -1,
-        //     yoyo: true,
-        //     transformOrigin: 'top right'
-        // });
 
         var tl = new TimelineMax({
             force3d: true,
@@ -622,12 +603,6 @@
             yoyo: true,
             ease: Power1.easeInOut})
 
-        // TweenMax.to('#Cocunut', 3, {
-        //     rotation: 360,
-        //     repeat: -1,
-        //     ease: Power0.easeNone,
-        //     transformOrigin: 'center center'
-        // })
     </script>
 </body>
 
