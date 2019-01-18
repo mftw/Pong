@@ -1,18 +1,25 @@
-//SAVES THE ID OF LEFT PADDLE TO A CONSTANT
-
-const player1Id = document.getElementById('paddleLeft'); console.log(player1Id);
+//SAVES THE ID OF LEFT PADDLE TO A CONSTANT PLAYER1ID
+const player1Id = document.getElementById('paddleLeft');
+console.log(player1Id);
 
 //SAVES THE ID OF RIGHT PADDLE TO A CONSTANT PLAYER1ID
 const player2Id = document.getElementById('paddleRight');
-
+console.log(player2Id)
 
 //EXTRACT THE STRING POSTION OF PADDLE FOR PLAYER ONE AND CONVERTS THE STRING TO A FLOAT
 let playerone =  player1Id.getAttribute("y","x");
-
+console.log(playerone);
 
 //EXTRACT THE STRING POSTION OF PADDLE FOR PLAYER TWO AND CONVERTS THE STRING TO A FLOAT
 let playertwo =  player2Id.getAttribute("y","x");
+console.log(playertwo);
 
+//RESETS THE PADDLES TO THE CENTER OF THE VIEWPORT
+player1Id.setAttribute('y', 50 + "%");
+console.log(player1Id);
+
+player2Id.setAttribute('y', 50 + "%");
+console.log(player2Id);
 
 //MOVES THE PADDLES ON X AXE
 player1Id.setAttribute('x',381);
@@ -24,10 +31,10 @@ function resetPaddles()
 {
 
         player1Id.setAttribute('y', 50 + "%");
-
+        console.log(player1Id);
 
         player2Id.setAttribute('y', 50 + "%");
-
+        console.log(player2Id);
 
 
         alert("Player reset");
@@ -80,27 +87,8 @@ bane_input.watch('p2down', () =>{
 }, 'ArrowDown'/*parameter must be the same as keys parameter*/);
 //--------------------------------------------------
 
-//VARIABLE THAT SAVES THE HALF OF THE HEIGHT OF THE LANE FOR THE COCONUT BALL
-var baneSize = document.getElementById('bane').getBBox().height / 2;
-console.log(baneSize);
-
-//VARIABLES USED IN FUNCTION TO CONTROL PADDLES
-var paddleP1Pos = 0;
-var paddleP2Pos = 0;
-var topBoundryP1 = parseInt(-baneSize);
-console.log(topBoundryP1);
-var bottomBoundryP1 = baneSize;
-console.log(topBoundryP1);
-var topBoundryP1 = -245;
-var bottomBoundryP1 = 229;
-var topBoundryP2 = -baneSize;
-console.log(topBoundryP2);
-var bottomBoundryP2 = baneSize;
-console.log(bottomBoundryP2);
-var topBoundryP2 = -245;
-var bottomBoundryP2 = 245;
-
-
+const topBoundry = 1 + "%";
+const bottomBoundry = 100 + "%";
 //FUNCTION THAT CONTROLS PADDLE MOVEMENTS
 function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
 {
@@ -109,112 +97,99 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
   let keytoUpperp1 = key.UPPLAYONE;
 
   let keytoLowerp1 = key.DOWNPLAYONE;
-
+  console.log(keytoLowerp1);
   let keytoUpperp2 = key.UPPLAYTWO;
-
+  console.log(keytoUpperp2);
 
   let keytoLowerp2 = key.DOWNPLAYTWO;
-
+  console.log(keytoLowerp2);
 
 
   //PLAYER ONE MOVE UP PADDLE
   if(pressedKey == keytoUpperp1)
       {
 
-              console.log(pressedKey);
+              //PADDLES STOPPER NÅR DEN NÅR TOP ELLER BUND OG KAN IKKE KØRER TILBAGE
 
-              paddleP1Pos -= 10;
-
-            if( paddleP1Pos >= topBoundryP1)
+          if(parseInt(player1Id.getAttribute("y")) <= topBoundry)
               {
-                moveSection(player1Id, 0, paddleP1Pos);
-              }
-
-              else {
-
-                paddleP1Pos = -245;
 
                 return;
+
               }
 
-        }
+              //PADDLE SKAL ØGES I HASTIGHED OG STARTE FRA MIDTEN AF SKÆRMEN
 
+
+              let num = parseFloat(player1Id.getAttribute("y"));
+              console.log(num);
+              let numplus = num-1+"%";
+              //console.log(numplus);
+              player1Id.setAttribute('y', numplus);
+              //console.log(player1Id);
+
+
+
+        }
+          //PADDLES STOPPER NÅR DEN NÅR TOP ELLER BUND OG KAN IKKE KØRER TILBAGE
           //PLAYER ONE MOVE DOWN PADDLE
           if(pressedKey == keytoLowerp1)
+            {
+              console.log(alert="Hello");
+              if(parseInt(player1Id.getAttribute("y")) <= topBoundry)
+                   {
+                      return;
+                    }
 
-          {
-
-                  console.log(pressedKey);
-
-                  paddleP1Pos += 10;
-
-                if( paddleP1Pos <= bottomBoundryP1)
-                  {
-                    moveSection(player1Id, 0, paddleP1Pos);
-                  }
-
-                  else {
-
-                    paddleP1Pos = 228;
-                    return;
-                  }
-            }
+                let num = parseFloat(player1Id.getAttribute("y"));
+                console.log(num);
+                let numplus = num+1+"%";
+                console.log(numplus);
+                player1Id.setAttribute('y', numplus);
+                console.log(player1Id);
 
 
+              }
+              //PADDLES STOPPER NÅR DEN NÅR TOP ELLER BUND OG KAN IKKE KØRER TILBAGE
            //PLAYER TWO MOVE UP PADDLE
            if(pressedKey == keytoUpperp2)
              {
 
-               console.log(pressedKey);
+               if(parseInt(player2Id.getAttribute("y")) <= topBoundry)
+                   {
+                     return;
+                   }
 
-               paddleP2Pos -= 10;
 
-             if( paddleP2Pos >= topBoundryP2 )
-               {
-                 moveSection(player2Id, 0, paddleP2Pos);
-               }
 
-               else {
-
-                 paddleP2Pos = -245;
-                 return;
-               }
+                    let num = parseFloat(player2Id.getAttribute("y"));
+                    console.log(num);
+                    let numplus = num-1+"%";
+                    console.log(numplus);
+                    player2Id.setAttribute('y', numplus);
+                    console.log(player1Id);
 
 
               }
 
-
+              //PADDLES STOPPER NÅR DEN NÅR TOP ELLER BUND OG KAN IKKE KØRER TILBAGE
             //PLAYER TWO MOVE DOWN PADDLE
             if(pressedKey == keytoLowerp2)
               {
 
-                paddleP2Pos += 10;
+                if(parseInt(player2Id.getAttribute("y")) <= topBoundry)
+                    {
+                      return;
+                    }
 
-              if(paddleP2Pos <= bottomBoundryP2)
-                {
-                  moveSection(player2Id, 0, paddleP2Pos);
-                }
 
-                else {
-
-                  paddleP2Pos = paddleP2Pos -1;
-                  return;
-                }
-
+                  let num = parseFloat(player2Id.getAttribute("y"));
+                  console.log(num);
+                  let numplus = num+1+"%";
+                  console.log(numplus);
+                  player2Id.setAttribute('y', numplus);
+                  console.log(player1Id);
               }
-}
-
-function moveSection(idStr, xOffset, yOffset) {
-    var domElemnt;
-    if(typeof idStr === 'object') {
-        domElemnt = idStr;
-    } else {
-        domElemnt = document.getElementById(idStr);
-    }
-    if (domElemnt) {
-        var transformAttr = ' translate(' + xOffset + ',' + yOffset + ')';
-        domElemnt.setAttribute('transform', transformAttr);
-    }
 }
 
 //FUNCTION GETS THE KEYS THAT IS PRESS ON KEYBOARD AND PARSE IT TO KEY FUNCTION

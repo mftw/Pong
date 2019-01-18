@@ -83,7 +83,22 @@ bane_input.watch('p2down', () =>{
 //VARIABLE THAT SAVES THE HALF OF THE HEIGHT OF THE LANE FOR THE COCONUT BALL
 var baneSize = document.getElementById('bane').getBBox().height / 2;
 console.log(baneSize);
+//const topBoundry = -baneSize;
+//const bottomBoundry = baneSize;
 
+//var paddleP1Pos = player1Id.getAttribute('y');
+//console.log(paddleP1Pos);
+//var paddleP2Pos = player2Id.getAttribute('y');
+//console.log(paddleP2Pos);
+
+//var paddleP1Pos = 0;
+//var paddleP1Size = player1Id.getBBox().height;
+//var paddlesizeHalf =  paddleP1Size /2;
+//console.log(paddlesizeHalf);
+
+//console.log('halvpaddlestørrelse: ' + paddleP1Size / 2);
+//console.log('halvbaneStørrelse: ' + baneSize);
+//console.log('translateStykke: ' + baneSize - (paddleP1Size / 2) );
 //VARIABLES USED IN FUNCTION TO CONTROL PADDLES
 var paddleP1Pos = 0;
 var paddleP2Pos = 0;
@@ -99,6 +114,9 @@ var bottomBoundryP2 = baneSize;
 console.log(bottomBoundryP2);
 var topBoundryP2 = -245;
 var bottomBoundryP2 = 245;
+
+
+
 
 
 //FUNCTION THAT CONTROLS PADDLE MOVEMENTS
@@ -122,8 +140,25 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
       {
 
               console.log(pressedKey);
+              //PADDLES STOPPER NÅR DEN NÅR TOP ELLER BUND OG KAN IKKE KØRER TILBAGE
+
 
               paddleP1Pos -= 10;
+
+//DETTE ER KODE SOM SKAL PRØVES AT IMPLEMENTERES HVIS DET KAN----------------------
+              /*console.log(paddleP1Pos);
+                moveSection(player1Id, 0, paddleP1Pos);
+              //console.log(paddleP1Pos);
+              //paddleP1Pos <= paddlesizeHalf - bane.centerY
+              // Check bottom and top collisions
+              if (paddleP1Pos >= (bane.centerY - paddlesizeHalf))
+              {
+                console.log("Virker ikke");
+                return;
+
+              }*/
+//----------------------------------------------------------------------------------
+
 
             if( paddleP1Pos >= topBoundryP1)
               {
@@ -131,7 +166,8 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
               }
 
               else {
-
+                //console.log(topBoundry);
+                //console.log("NUUUUU");
                 paddleP1Pos = -245;
 
                 return;
@@ -145,16 +181,18 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
           {
 
                   console.log(pressedKey);
+                  //PADDLES STOPPER NÅR DEN NÅR TOP ELLER BUND OG KAN IKKE KØRER TILBAGE
 
                   paddleP1Pos += 10;
-
+                  //console.log(paddleP1Pos);
                 if( paddleP1Pos <= bottomBoundryP1)
                   {
                     moveSection(player1Id, 0, paddleP1Pos);
                   }
 
                   else {
-
+                    //console.log(topBoundry);
+                    //console.log("NUUUUU");
                     paddleP1Pos = 228;
                     return;
                   }
@@ -166,16 +204,17 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
              {
 
                console.log(pressedKey);
-
+               //PADDLES STOPPER NÅR DEN NÅR TOP ELLER BUND OG KAN IKKE KØRER TILBAGE
                paddleP2Pos -= 10;
-
+               //console.log(paddleP2Pos);
              if( paddleP2Pos >= topBoundryP2 )
                {
                  moveSection(player2Id, 0, paddleP2Pos);
                }
 
                else {
-
+                 //console.log(topBoundry);
+                 //console.log("NUUUUU");
                  paddleP2Pos = -245;
                  return;
                }
@@ -187,16 +226,18 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption)
             //PLAYER TWO MOVE DOWN PADDLE
             if(pressedKey == keytoLowerp2)
               {
-
+                //console.log(pressedKey);
+                //PADDLES STOPPER NÅR DEN NÅR TOP ELLER BUND OG KAN IKKE KØRER TILBAGE
                 paddleP2Pos += 10;
-
+                //console.log(paddleP2Pos);
               if(paddleP2Pos <= bottomBoundryP2)
                 {
                   moveSection(player2Id, 0, paddleP2Pos);
                 }
 
                 else {
-
+                  //console.log(topBoundry);
+                  //console.log("NUUUUU");
                   paddleP2Pos = paddleP2Pos -1;
                   return;
                 }
