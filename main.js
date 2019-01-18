@@ -1,6 +1,6 @@
 var bane = document.getElementById('bane');
-bane.centerX = bane.getBBox().width / 2;
-bane.centerY = bane.getBBox().height / 2;
+bane.centerX = parseFloat(bane.getBBox().width / 2);
+bane.centerY = parseFloat(bane.getBBox().height / 2);
 
 var bold = document.getElementById('Cocunut');
 bold.ballSize = parseFloat(bold.firstElementChild.getAttribute('r'));
@@ -27,9 +27,14 @@ function moveSection(idStr, xOffset, yOffset, extras = '') {
 var game = null;
 var x = 0;
 var y = 0;
-var vx = -2;
-var vy = -2;
-var acc = 1;
+var vx = -1;
+var vy = -1;
+var acc = 5;
+
+var collisionSoundURL = './pop.mp3';
+// var collisionSoundURL = './basketBall.mp3';
+// var collisionSoundURL = './basketBall2.mp3';
+// var collisionSoundURL = './pingPongBall.mp3';
 
 function startGame() {
     if (game !== null) {
@@ -44,7 +49,7 @@ function startGame() {
         // Check bottom and top collisions
         if (y >= (bane.centerY - bold.ballSize) || y <= bold.ballSize - bane.centerY) {
             vy = -vy;
-            collisionSound();
+            collisionSound(collisionSoundURL);
             // playBeep(200);
             // console.log('collision x')
         } 
@@ -52,7 +57,7 @@ function startGame() {
         // Check left and right collisions
         if (x >= bane.centerX || x <= bold.ballSize - bane.centerX) {
             vx = -vx;
-            collisionSound();
+            collisionSound(collisionSoundURL);
             // playBeep();
         }
 
