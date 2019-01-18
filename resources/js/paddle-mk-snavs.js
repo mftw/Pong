@@ -22,13 +22,8 @@ player2Id.setAttribute('x', 1549);
 
 //FUNCTION RESETS THE PADDLES TO THE CENTER OF THE VIEWPORT
 function resetPaddles() {
-
-  player1Id.setAttribute('y', 50 + "%");
-
-
-  player2Id.setAttribute('y', 50 + "%");
-
-
+  moveSection(player1Id, 0, paddleP1Pos = 0);
+  moveSection(player2Id, 0, paddleP1Pos = 0);
 
   alert("Player reset");
 }
@@ -52,7 +47,7 @@ function init(top, bottom) {
 }
 
 //GETS THE ID FOR THE CANVAS
-//var bane = document.getElementById('canvas');
+
 var bane = document;
 
 //USES FUNCTION THAT CONTROLS THE KEYS
@@ -80,23 +75,16 @@ bane_input.watch('p2down', () => {
 
 //VARIABLE THAT SAVES THE HALF OF THE HEIGHT OF THE LANE FOR THE COCONUT BALL
 var baneSize = document.getElementById('bane').getBBox().height / 2;
-console.log(baneSize);
+
 
 //VARIABLES USED IN FUNCTION TO CONTROL PADDLES
 var paddleP1Pos = 0;
 var paddleP2Pos = 0;
-var topBoundryP1 = parseInt(-baneSize);
-console.log(topBoundryP1);
-var bottomBoundryP1 = baneSize;
-console.log(topBoundryP1);
-var topBoundryP1 = -245;
+var topBoundryP1 = -244;
 var bottomBoundryP1 = 229;
-var topBoundryP2 = -baneSize;
-console.log(topBoundryP2);
-var bottomBoundryP2 = baneSize;
-console.log(bottomBoundryP2);
-var topBoundryP2 = -245;
-var bottomBoundryP2 = 245;
+var topBoundryP2 = -231;
+var bottomBoundryP2 = 242;
+
 
 
 //FUNCTION THAT CONTROLS PADDLE MOVEMENTS
@@ -117,15 +105,13 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption) {
   //PLAYER ONE MOVE UP PADDLE
   if (pressedKey == keytoUpperp1) {
 
-    console.log(pressedKey);
-
     paddleP1Pos -= 10;
 
     if (paddleP1Pos >= topBoundryP1) {
       moveSection(player1Id, 0, paddleP1Pos);
     } else {
 
-      paddleP1Pos = -245;
+      paddleP1Pos = -244;
 
       return;
     }
@@ -137,15 +123,13 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption) {
 
   {
 
-    console.log(pressedKey);
-
     paddleP1Pos += 10;
 
     if (paddleP1Pos <= bottomBoundryP1) {
       moveSection(player1Id, 0, paddleP1Pos);
     } else {
 
-      paddleP1Pos = 228;
+      paddleP1Pos = 229;
       return;
     }
   }
@@ -154,15 +138,13 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption) {
   //PLAYER TWO MOVE UP PADDLE
   if (pressedKey == keytoUpperp2) {
 
-    console.log(pressedKey);
-
     paddleP2Pos -= 10;
 
     if (paddleP2Pos >= topBoundryP2) {
       moveSection(player2Id, 0, paddleP2Pos);
     } else {
 
-      paddleP2Pos = -245;
+      paddleP2Pos = -230;
       return;
     }
 
@@ -175,11 +157,13 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption) {
 
     paddleP2Pos += 10;
 
-    if (paddleP2Pos <= bottomBoundryP2) {
+    if (paddleP2Pos <= bottomBoundryP2)
+    {
       moveSection(player2Id, 0, paddleP2Pos);
-    } else {
+    }
+    else {
 
-      paddleP2Pos = paddleP2Pos - 1;
+      paddleP2Pos = 242;
       return;
     }
 
