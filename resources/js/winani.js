@@ -19,6 +19,7 @@ function bg(win) {
 
     handle.from('#svg', 1, {
         scale: 0,
+        ease:Back.easeOut,
     })
 
     handle.from('#bg', 5, {

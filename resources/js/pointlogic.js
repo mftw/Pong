@@ -30,7 +30,7 @@ function resetScoreboard() {
 function winSituation(win) {
     console.log("Whatever der nu sker når en vinder");
     bg(win);
-    winnerSong();
+    // winnerSong();
 }
 
 
