@@ -30,7 +30,7 @@ function resetScoreboard() {
 function winSituation(win) {
     console.log("Whatever der nu sker når en vinder");
     bg(win);
-    // winnerSong();
+    winnerSong();
 }
 
 
@@ -56,7 +56,7 @@ document.getElementById("reset").addEventListener("click", function() {
     resetScoreboard();
 });
 
-var audio = new Audio('/goe.mp3');
+var audio = new Audio('./resources/audio/goe.mp3');
 function winnerSong(reset = true) {
     if(reset === false) {
         // delete audio;
@@ -64,6 +64,6 @@ function winnerSong(reset = true) {
         audio = null;
         return;
     }
-    audio = new Audio('/goe.mp3');
+    audio = new Audio('./resources/audio/goe.mp3');
     audio.play();
 }

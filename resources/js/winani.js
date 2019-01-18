@@ -22,7 +22,7 @@ function bg(win) {
         ease:Back.easeOut,
     })
 
-    handle.from('#bg', 5, {
+    handle.from('#bg-star', 5, {
         rotation: 360,
         repeat: -1,
         transformOrigin:"center center",
