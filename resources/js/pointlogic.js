@@ -4,7 +4,7 @@ var leftScore = document.getElementById("leftScore");
 var rightScore = document.getElementById("rightScore");
 var p1 = document.getElementById("player1");
 var p2 = document.getElementById("player2");
-var winnerScore = 2;
+var winnerScore = 11;
 var winnerFound = false;
 
 function countPlayerScore(counter, win) {

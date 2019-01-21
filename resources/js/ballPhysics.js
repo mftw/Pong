@@ -32,8 +32,8 @@ var x,
     vy,
     acc;
 
-var globalVolume = 0.5;
-// var globalVolume = 0;
+// var globalVolume = 0.5;
+var globalVolume = 0;
 
 // Initialize the game variables
 initGame();
@@ -167,10 +167,13 @@ function startGame() {
             vx = -vx;
             collisionSound(collisionSoundURL);
             // handleP1Goal();
-            // resetAfterPoint();
+            // resetAfterPoint.call();
+            // eval(resetAfterPoint());
             // return;
             // playBeep();
             // console.log('højre')
+            var event = new Event('p1goal');
+            dispatchEvent(event);
         }
 
         // Check left collision
@@ -178,17 +181,21 @@ function startGame() {
             vx = -vx;
             collisionSound(collisionSoundURL);
             // handleP2Goal();
-            // resetAfterPoint();
+            // resetAfterPoint.call();
+            // eval(resetAfterPoint());
             // return;
             // console.log('venstre')
+            var event = new Event('p2goal');
+            dispatchEvent(event);
         }
 
         // Move the ball with fresh coordinates
         moveSection(bold, x, y);
     })
-
     return game;
 }
+
+
 
 function pauseGame(alsoMusic = true) {
     // Check if game is running
@@ -207,20 +214,50 @@ function pauseGame(alsoMusic = true) {
     // game = null;
 }
 
-function resetGame() {
-    pauseGame();
+function resetGame(alsoMusic = true) {
+    pauseGame(alsoMusic);
     initGame();
     moveSection(bold, x, y);
     stopBgMusic();
 }
 
+// var resetGame = (alsoMusic = true) => {
+//     pauseGame(alsoMusic);
+//     initGame();
+//     moveSection(bold, x, y);
+//     stopBgMusic();
+// }
+
 function resetAfterPoint(startDelay = 1000) {
-    pauseGame(alsoMusic = false);
-    // pauseBgMusicLoop();
-    initGame();
-    moveSection(bold, x, y);
-    delayedStart(startDelay);
+    // pauseGame(alsoMusic = false);
+    // initGame();
+    // moveSection(bold, x, y);
+    
+    resetGame(alsoMusic = false);
+    // delayedStart(startDelay);
+    delayedStartTimer = setTimeout(() => {
+        startGame();
+        // clearTimeout(delayedStartTimer);
+        // delayedStartTimer = null;
+        cancelDelayedStart();
+        console.log('timer fired');
+    }, startDelay)
 }
+
+// var resetAfterPoint = (startDelay = 1000) => {
+//     // pauseGame(alsoMusic = false);
+//     // initGame();
+//     // moveSection(bold, x, y);
+//     resetGame(alsoMusic = false);
+//     // delayedStart(startDelay);
+//     delayedStartTimer = setTimeout(() => {
+//         startGame();
+//         // clearTimeout(delayedStartTimer);
+//         // delayedStartTimer = null;
+//         cancelDelayedStart();
+//         console.log('timer fired');
+//     }, startDelay)
+// }
 
 var delayedStartTimer = null;
 function delayedStart(delay = 1000) {
@@ -336,11 +373,13 @@ volumeSlider.oninput = function() {
     updateBgMusicVolume();
 }
 
+
+
 // var lastTime;
 window.requestInterval = function (fn) {
 
     var handle = new Object();
-    
+
     // rAF parses a timestamp of the animation
     // function loop(ms) {
     //     if(handle.lastTime) {
@@ -442,8 +481,8 @@ function collisionSound(sound = '/resources/audio/pop.mp3') {
     // collisionAudio.play();
 }
 
-// Make an audio object that contains the nice background music
 // var bgMusic = new Audio('./resources/audio/goe.mp3');
+// Make an audio object that contains the nice background music
 var bgMusic = new Audio('./resources/audio/bg-music.mp3');
 bgMusic.loop = true;
 
