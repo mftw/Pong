@@ -173,7 +173,7 @@ function startGame() {
             // playBeep();
             // console.log('højre')
             var event = new Event('p1goal');
-            dispatchEvent(event);
+            document.dispatchEvent(event);
         }
 
         // Check left collision
@@ -186,7 +186,7 @@ function startGame() {
             // return;
             // console.log('venstre')
             var event = new Event('p2goal');
-            dispatchEvent(event);
+            document.dispatchEvent(event);
         }
 
         // Move the ball with fresh coordinates
@@ -338,6 +338,18 @@ function handleStartButton(event) {
         elm.innerHTML = 'PAUSE'
     }
 }
+
+document.addEventListener('p1goal', e => {
+    handleP1Goal();
+    window.resetAfterPoint();
+    e.preventDefault();
+});
+
+document.addEventListener('p2goal', e => {
+    handleP2Goal();
+    window.resetAfterPoint();
+    e.preventDefault();
+});
 
 // document.addEventListener('keypress', (e) => {
 //     if(e.key === ' ') {
