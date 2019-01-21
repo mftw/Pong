@@ -49,7 +49,7 @@ function bg(win) {
 }
 
 function resetWinAni() {
-    handle.killTweensOf( winner );
+    // handle.killTweensOf( winner );
     handle.killChildTweensOf( svg );
     handle.killTweensOf( svg );
     handle = null;

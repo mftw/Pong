@@ -1,3 +1,4 @@
+// Få fat i bane svg elementet
 var bane = document.getElementById('bane');
 bane.centerX = parseFloat(bane.getBBox().width / 2);
 bane.centerY = parseFloat(bane.getBBox().height / 2);
@@ -5,10 +6,6 @@ bane.centerY = parseFloat(bane.getBBox().height / 2);
 var bold = document.getElementById('Cocunut');
 bold.ballSize = parseFloat(bold.firstElementChild.getAttribute('r'));
 
-
-// bold.ballSize = bold.firstElementChild.firstElementChild.getAttribute('ry') * 2;
-// bold.ballSize = bold.firstElementChild.getAttribute('r') * 2;
-// console.log(bold.ballSize);
 
 function moveSection(idStr, xOffset, yOffset, extras = '') {
     var domElemnt;
@@ -23,15 +20,23 @@ function moveSection(idStr, xOffset, yOffset, extras = '') {
     }
 } 
 
+// This variable contains the game loop
+var game = {};
+game.started = false;
+game.loop = 0;
 
-var game = null;
-var x = 0;
-var y = 0;
-var vx = Math.random() * 2 - 1;
-var vy = Math.random() * 2 - 1;
-var acc = 5;
+// Working variables for the game
+var x,
+    y,
+    vx,
+    vy,
+    acc;
 
-var gameStarted = false;
+var globalVolume = 0.5;
+// var globalVolume = 0;
+
+// Initialize the game variables
+initGame();
 
 var collisionSoundURL = './resources/audio/pop.mp3';
 // var collisionSoundURL = './resources/audio/basketBall.mp3';
@@ -41,53 +46,199 @@ var collisionSoundURL = './resources/audio/pop.mp3';
 function initGame() {
     x = 0;
     y = 0;
-    vx = Math.random() * 2 - 1;
-    vy = Math.random() * 2 - 1;
-    acc = 5;
-}
+    vx = getRandomArbitrary();
+    vy = getRandomArbitrary();
+    acc = 2.5;
 
-function startGame() {
+    // if(Math.abs(vy) < 0.5 || Math.abs(vx) < 0.3) {
+    //     initGame();
+    // }
 
-    if (game !== null) {
-        return;
+    // Prevent the ball from 'stalling'
+    if(Math.abs(vx) < 0.3) {
+        initGame();
     }
 
-    game = requestInterval(() => {
+    return {
+        x: x,
+        y: y,
+        vx: vx,
+        vy: vy,
+        acc: acc
+    }
+}
 
-        x += vx * acc;
-        y += vy * acc;
+/**
+ *  Get a random number within the range of
+ *  min and max. The number is also randomly negative
+ * @param {float} min 
+ * @param {float} max 
+ */
+function getRandomArbitrary(min = 0.2, max = 1) {
+    if(Math.random() < 0.5) {
+        return Math.random() * (max - min) + min;
+    } else {
+        return -(Math.random() * (max - min) + min);
+    }
+}
 
-        // Check bottom and top collisions
-        if (y >= (bane.centerY - bold.ballSize) || y <= bold.ballSize - bane.centerY) {
+
+
+function startGame() {
+    // clearTimeout(delayedStartTimer);
+    // delayedStartTimer = null;
+    game.started = true;
+    cancelDelayedStart();
+
+    // if (game.started === false || winnerFound) {
+    //     return game.started;
+    // }
+    if (winnerFound) {
+        return game;
+    }
+
+    startBgMusic();
+    // bgMusic.volume = 0.5 * globalVolume;
+
+    let config = {
+        x: x,
+        y: y,
+        vx: vx,
+        vy: vy,
+        acc: acc
+    }
+
+    // console.log(config)
+
+
+    // Check which direction the ball is heading,
+    // to prevent that the ball is 'sticking' to the side,
+    // or the paddles on collisions.
+    function whichDir(old, current) {
+        if(old < current) {
+            return -1;
+        } else {
+            return 1;
+        }
+    }
+
+    game.loop = requestInterval( dt => {
+        // console.log(dt)
+        // console.log(game.loop);
+        // cancelDelayedStart();
+
+        if(game.started === false || winnerFound) {
+            pauseGame();
+            // cancelDelayedStart();
+            return;
+        }
+        // Keep the current value of x and y
+        // to determine the direction the ball is heading later on.
+        let lastX = x;
+        let lastY = y;
+
+        // Calculate new x and y coordinates for the ball
+        x += vx * dt * acc;
+        y += vy * dt * acc;
+        // x += vx * acc;
+        // y += vy * acc;
+
+        // Get the direction of the ball.
+        let dirx = whichDir(lastX, x);
+        let diry = whichDir(lastY, y);
+
+        // Check bottom collision
+        if(y >= bane.centerY - bold.ballSize && diry === -1) {
             vy = -vy;
             collisionSound(collisionSoundURL);
             // playBeep(200);
-        } 
-
-        // Check left and right collisions
-        if (x >= bane.centerX || x <= bold.ballSize - bane.centerX) {
-            vx = -vx;
+            // console.log('ned');
+        }
+        
+        // Check top collision
+        if(y <= bold.ballSize - bane.centerY && diry === 1) {
+            vy = -vy;
             collisionSound(collisionSoundURL);
-            // playBeep();
+            // console.log('op');
         }
 
+        // Check right collision
+        if(x >= bane.centerX && dirx === -1) {
+            vx = -vx;
+            collisionSound(collisionSoundURL);
+            // handleP1Goal();
+            // resetAfterPoint();
+            // return;
+            // playBeep();
+            // console.log('højre')
+        }
+
+        // Check left collision
+        if(x <= bold.ballSize - bane.centerX && dirx === 1) {
+            vx = -vx;
+            collisionSound(collisionSoundURL);
+            // handleP2Goal();
+            // resetAfterPoint();
+            // return;
+            // console.log('venstre')
+        }
+
+        // Move the ball with fresh coordinates
         moveSection(bold, x, y);
     })
+
+    return game;
 }
 
-function stopGame() {
-    if (game === null) {
+function pauseGame(alsoMusic = true) {
+    // Check if game is running
+    // if not, escape the function
+    if(game.started === false || game.started === 'undefined') {
         return;
     }
-
-    clearRequestInterval(game);
-    game = null;
+    if(alsoMusic) {
+        pauseBgMusicLoop();
+    }
+    if(game.loop !== 'undefined') {
+        cancelAnimationFrame(game.loop.value);
+        // clearRequestInterval(game.loop);
+    }
+    game.started = false;
+    // game = null;
 }
 
 function resetGame() {
-    stopGame();
+    pauseGame();
     initGame();
     moveSection(bold, x, y);
+    stopBgMusic();
+}
+
+function resetAfterPoint(startDelay = 1000) {
+    pauseGame(alsoMusic = false);
+    // pauseBgMusicLoop();
+    initGame();
+    moveSection(bold, x, y);
+    delayedStart(startDelay);
+}
+
+var delayedStartTimer = null;
+function delayedStart(delay = 1000) {
+    // clearTimeout(delayedStartTimer);
+    // delayedStartTimer = null;
+
+    delayedStartTimer = setTimeout(() => {
+        startGame();
+        // clearTimeout(delayedStartTimer);
+        // delayedStartTimer = null;
+        cancelDelayedStart();
+        console.log('timer fired');
+    }, delay)
+}
+
+function cancelDelayedStart() {
+    clearTimeout(delayedStartTimer);
+    delayedStartTimer = null;
 }
 
 var startBtn = document.getElementById('start-button');
@@ -95,16 +246,20 @@ var stopBtn = document.getElementById('stop-button');
 var speedx1Btn = document.getElementById('speedx1');
 var speedx2Btn = document.getElementById('speedx2');
 var revBtn = document.getElementById('reverse');
+var startSvgBtn = document.querySelector('.start-svg')
+var userStartedGame = false;
 
 startBtn.addEventListener('click', () => {
     startGame();
     // console.log(game)
     TweenMax.resumeAll()
+    userStartedGame = true;
 });
 
 stopBtn.addEventListener('click', () => {
-    stopGame();
+    pauseGame();
     TweenMax.pauseAll()
+    userStartedGame = false;
 });
 
 speedx1Btn.addEventListener('click', () => {
@@ -120,17 +275,101 @@ revBtn.addEventListener('click', () => {
     vy = -vy;
 });
 
+// startSvgBtn.addEventListener('click', e => {
+//     // console.log('you clicked it, didn\'t you?')
+//     startGame();
+//     // console.log(game)
+//     TweenMax.resumeAll()
+//     userStartedGame = true;
+//     console.log(e)
+// });
+
+startSvgBtn.addEventListener('click', handleStartButton);
+
+function handleStartButton(event) {
+    let elm = event.target;
+    if(game.started === true) {
+        pauseGame();
+        TweenMax.pauseAll()
+        userStartedGame = false;
+        elm.innerHTML = 'START'
+    } else {
+        startGame();
+        // console.log(game)
+        TweenMax.resumeAll()
+        userStartedGame = true;
+        elm.innerHTML = 'PAUSE'
+    }
+}
+
+// document.addEventListener('keypress', (e) => {
+//     if(e.key === ' ') {
+//         if(!userStartedGame) {
+//             startGame()
+//             userStartedGame = true;
+//             TweenMax.resumeAll();
+//         } else {
+//             pauseGame();
+//             userStartedGame = false;
+//             TweenMax.pauseAll();
+//         }
+//     }
+// }, false)
+
+document.addEventListener('visibilitychange', handleVisibilityChange, false);
+
+function handleVisibilityChange() {
+    if (document.visibilityState === 'visible' && userStartedGame) {
+        startGame()
+    } else  {
+        pauseGame()
+    }
+}
+
+var volumeSlider = document.getElementById('volume');
+// output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+volumeSlider.oninput = function() {
+    // console.log(this.value / 100)
+    globalVolume = this.value / 100;
+    updateBgMusicVolume();
+}
+
+// var lastTime;
 window.requestInterval = function (fn) {
 
     var handle = new Object();
+    
+    // rAF parses a timestamp of the animation
+    // function loop(ms) {
+    //     if(handle.lastTime) {
+    //         // fn.call((ms - handle.lastTime) / 1000);
+    //         fn((ms - handle.lastTime) / 10);
+    //     }
+    //     handle.lastTime = ms;
+    //     handle.value = requestAnimationFrame(loop);
+    // };
 
-    function loop() {
-        fn.call();
-
-        handle.value = requestAnimationFrame(loop);
+    // rAF parses a timestamp of the animation
+    handle.loop = (ms) => {
+        if(handle.lastTime) {
+            let dt = ms - handle.lastTime;
+            // fn.call();
+            // fn((ms - handle.lastTime) / 10);
+            fn(dt / 10);
+            handle.dt = dt;
+        }
+        handle.lastTime = ms;
+        // handle.dt = ms - handle.lastTime;
+        // handle.started = true;
+        // handle.value = requestAnimationFrame(loop);
+        handle.value = requestAnimationFrame(handle.loop);
     };
 
-    handle.value = requestAnimationFrame(loop);
+    // handle.value = requestAnimationFrame(loop);
+    // rAF returns a unique integer per frame, use it to cancelAnimationFrame()
+    handle.value = requestAnimationFrame(handle.loop);
     return handle;
 }
 
@@ -147,6 +386,7 @@ window.clearRequestInterval = function (handle) {
 // https://codepen.io/kulak-at/pen/oqbKpq
 
 
+
 var context = null;
 var oscillator = null;
 
@@ -158,8 +398,6 @@ function getOrCreateContext() {
     }
     return context;
 }
-
-
 
 /**
  * 
@@ -193,32 +431,46 @@ function playBeep(freq = 400, time = 100, type = 'square') {
 }
 
 // var audio = null;
+// var collisionAudio = new Audio('/resources/audio/pop.mp3');
 function collisionSound(sound = '/resources/audio/pop.mp3') {
+// function collisionSound() {
     var audio = new Audio(sound);
+    audio.volume = globalVolume;
     audio.play();
+    // collisionAudio.volume = globalVolume;
+    // collisionAudio.currentTime = 0;
+    // collisionAudio.play();
 }
 
+// Make an audio object that contains the nice background music
+// var bgMusic = new Audio('./resources/audio/goe.mp3');
 var bgMusic = new Audio('./resources/audio/bg-music.mp3');
+bgMusic.loop = true;
 
+function startBgMusic(vol = 0.5) {
+    bgMusic.play();
+    // bgMusic.volume = globalVolume * vol;
+    updateBgMusicVolume(vol);
+    return bgMusic;
+}
 
-// var tmpX = Math.random() * 2 - 1;
-// var tmpY = Math.random() * 2 - 1;
-var tmpX = 4;
-var tmpY = 3;
+function stopBgMusic() {
+    // breakBgMusicLoop();
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+    return bgMusic;
+}
 
-// var tmpC = Math.sqrt((tmpX ^ 2) + (tmpY ^ 2));
-var tmpC = Math.sqrt(Math.pow(tmpX, 2) + Math.pow(tmpY, 2));
+function pauseBgMusicLoop() {
+    if(bgMusic.paused) {
+        // breakBgMusicLoop();
+        startBgMusic();
+    } else {
+        bgMusic.pause();
+    }
+    return bgMusic;
+}
 
-// var sinV = Math.sin( tmpC / tmpX);
-// var sinV = tmpC / tmpX;
-var sinV = tmpY / tmpC;
-
-// var angle = Math.sin(sinV)*(180/Math.PI);
-var angle = Math.sin(sinV) * (180 / Math.PI);
-
-
-// console.log(tmpX);
-// console.log(tmpY);
-// console.log(tmpC);
-// console.log(sinV);
-// console.log(angle);
+function updateBgMusicVolume(vol = 0.5) {
+    bgMusic.volume = globalVolume * vol;
+}

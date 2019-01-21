@@ -5,10 +5,13 @@ var rightScore = document.getElementById("rightScore");
 var p1 = document.getElementById("player1");
 var p2 = document.getElementById("player2");
 var winnerScore = 2;
+var winnerFound = false;
 
 function countPlayerScore(counter, win) {
     if(counter == winnerScore - 1) {
         console.log("winner: " + win);
+        winnerFound = true;
+        cancelDelayedStart();
         winSituation(win);
     }
     return counter + 1;
@@ -22,6 +25,7 @@ function scoreBoard() {
 function resetScoreboard() {
     playerOneScore = 0;
     playerTwoScore = 0;
+    winnerFound = false;
     resetWinAni();
     winnerSong(false);
     scoreBoard();
@@ -35,38 +39,64 @@ function winSituation(win) {
 
 
 
-p1.addEventListener("click", function() {
+// p1.addEventListener("click", function() {
+//     playerOneScore.innerHTML = "<h3>" + playerOneScore + "</h3>";
+//     if(playerOneScore == winnerScore) {
+//         return;
+//     }
+//     playerOneScore = countPlayerScore(playerOneScore, "player1");
+//     scoreBoard();
+// });
+
+p1.addEventListener("click", handleP1Goal, false);
+
+function handleP1Goal() {
     playerOneScore.innerHTML = "<h3>" + playerOneScore + "</h3>";
     if(playerOneScore == winnerScore) {
         return;
     }
     playerOneScore = countPlayerScore(playerOneScore, "player1");
     scoreBoard();
-});
+}
 
-p2.addEventListener("click", function() {
+
+// p2.addEventListener("click", function() {
+//     if(playerTwoScore == winnerScore) {
+//         return;
+//     }
+//     playerTwoScore = countPlayerScore(playerTwoScore, "player2");
+//     scoreBoard();
+// });
+
+p2.addEventListener("click", handleP2Goal, false);
+
+function handleP2Goal() {
     if(playerTwoScore == winnerScore) {
         return;
     }
     playerTwoScore = countPlayerScore(playerTwoScore, "player2");
     scoreBoard();
-});
+}
 
 document.getElementById("reset").addEventListener("click", function() {
     resetScoreboard();
     resetGame()
+    userStartedGame = false;
 });
 
 var audio = new Audio('./resources/audio/goe.mp3');
 function winnerSong(reset = true) {
+
     if(reset === false) {
-        // delete audio;
         if(audio) {
             audio.pause();
+            audio.currentTime = 0;
         }
-        audio = null;
         return;
     }
-    audio = new Audio('./resources/audio/goe.mp3');
+    // audio = new Audio('./resources/audio/goe.mp3');
+    audio.volume = globalVolume;
     audio.play();
 }
+
+(resetScoreboard());
