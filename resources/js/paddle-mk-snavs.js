@@ -81,9 +81,9 @@ var baneSize = document.getElementById('bane').getBBox().height / 2;
 var paddleP1Pos = 0;
 var paddleP2Pos = 0;
 var topBoundryP1 = -244;
-var bottomBoundryP1 = 229;
-var topBoundryP2 = -231;
-var bottomBoundryP2 = 242;
+var bottomBoundryP1 = 239;
+var topBoundryP2 = -245;
+var bottomBoundryP2 = 238;
 
 
 
@@ -111,7 +111,7 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption) {
       moveSection(player1Id, 0, paddleP1Pos);
     } else {
 
-      paddleP1Pos = -244;
+      paddleP1Pos = topBoundryP1;
 
       return;
     }
@@ -129,7 +129,7 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption) {
       moveSection(player1Id, 0, paddleP1Pos);
     } else {
 
-      paddleP1Pos = 229;
+      paddleP1Pos = bottomBoundryP1;
       return;
     }
   }
@@ -139,12 +139,13 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption) {
   if (pressedKey == keytoUpperp2) {
 
     paddleP2Pos -= 10;
+    console.log(paddleP2Pos);
 
     if (paddleP2Pos >= topBoundryP2) {
       moveSection(player2Id, 0, paddleP2Pos);
     } else {
 
-      paddleP2Pos = -230;
+      paddleP2Pos = topBoundryP2;
       return;
     }
 
@@ -163,7 +164,7 @@ function keys(pressedKey, topBoundry, bottomBoundry, key = keyOption) {
     }
     else {
 
-      paddleP2Pos = 242;
+      paddleP2Pos = bottomBoundryP2;
       return;
     }
 
