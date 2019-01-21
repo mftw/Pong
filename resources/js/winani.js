@@ -15,7 +15,7 @@ function bg(win) {
         svg.style.display = "block";
     }
 
-    winner.innerHTML = win + " wins!";
+    winner.innerHTML = win + " wins";
 
     handle.from('#svg', 1, {
         scale: 0,
