@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'ZCOOL KuaiLe';
+    font-style: normal;
+    font-weight: 400;
+    src: local('ZCOOLKuaiLe-Regular'), local('ZCOOLKuaiLe-Regular'), url(https://fonts.gstatic.com/s/zcoolkuaile/v2/tssqApdaRQokwFjFJjvM6h2Wo-Tpo2MpsrpYU3EJjXfOiTrBdUtGm0PGsPHkbHZzpr3G.4.woff2) format('woff2');
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.full-game {
+    max-height: 100vh;
+    display: block;
+    margin: 0 auto;
+}
+
+.start-svg {
+    cursor: pointer;
+}
+
+.start-svg:active {
+    user-select: none;
+    fill: red;
+}
+
+.scores {
+    display: none;
+    height: 0;
+    width: 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+}
+
+button, input {
+    display: none;
+    height: 0;
+    width: 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+}
+
+.st42 {
+    font-family:'ZCOOL KuaiLe';
+}
+
