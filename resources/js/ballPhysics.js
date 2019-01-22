@@ -58,8 +58,8 @@ var bold = document.getElementById('Cocunut');
 bold.ballSize = parseFloat(bold.firstElementChild.getAttribute('r'));
 
 // Make an audio object that contains the nice background music
-// var bgMusic = new Audio('./resources/audio/bg-music.mp3');
-// bgMusic.loop = true;
+var bgMusic = new Audio('./resources/audio/bg-music.mp3');
+bgMusic.loop = true;
 
 // This variable contains the game loop
 var game = {
@@ -564,8 +564,8 @@ function collisionSound(sound = '/resources/audio/pop.mp3') {
 
 // // var bgMusic = new Audio('./resources/audio/goe.mp3');
 // // Make an audio object that contains the nice background music
-var bgMusic = new Audio('./resources/audio/bg-music.mp3');
-bgMusic.loop = true;
+// var bgMusic = new Audio('./resources/audio/bg-music.mp3');
+// bgMusic.loop = true;
 
 function startBgMusic(vol = 0.5) {
     bgMusic.play();
