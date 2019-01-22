@@ -70,7 +70,7 @@
 		.st47{font-size:57px;}
 		.st48{font-size:100px;}
 		.st49{font-size:79px;}
-		.st50{display:none}
+		.st50{display:none;}
 	</style>
 	<linearGradient id="bg_1_" gradientUnits="userSpaceOnUse" x1="990.5" y1="746" x2="990.5" y2="-356" gradientTransform="matrix(1 0 0 1 0 356)">
 		<stop  offset="1.980641e-02" style="stop-color:#E4D3BB"/>
@@ -552,47 +552,26 @@ tl1.set('#pinaCola_x5F_left',{
 	rotation: 10,
 	yoyo: true,
 	ease: Power1.easeInOut});
-// .to('#pinaCola_x5F_right',3,{
-// 	// transformOrigin: 'bottom center',
 
-// 	ease: Power1.easeInOut})
-// .to('#pinaCola_x5F_right',3,{
-// 	// transformOrigin: 'center center',
-// 	 yoyo:true,
-// 	ease: Power4.easeInOut
-//});
+	TweenMax.to('.st3', 5, { 
+		repeat: -1, 
+		transformOrigin: 'center',
+		ease: Power4.easeInOut,
+		rotation: -5,
+		yoyo: true, 
+		   });
 
-// tl1.set('#pinaCola_x5F_left',{
-// 	transformOrigin: 'bottom center', 
-// 	ease: Power4.easeInOut})
-// .to('#pinaCola_x5F_left', 1, {
-// 	rotation: -10,
-// 	// transformOrigin: 'bottom center',
+	TweenMax.to('.st4', 5, { 
+		transformOrigin: 'bottom',
+		repeat: -1, 
+		ease: Power4.easeInOut,
+		rotation: -5,
+		yoyo: true, 
+		   });
+		
 
-// 	ease: Power1.easeInOut})
-// .to('#pinaCola_x5F_left',1,{
-// 	rotation: 10,
-// 	// transformOrigin: 'bottom center',
-// 	ease: Power1.easeInOut})
-// .to('#pinaCola_x5F_left',1,{
-// 	// transformOrigin: 'center center',
-// 	// yoyo:true,
-// 	ease: Power4.easeInOut
-// });
+console.log(TweenMax);
 
-
-// TweenMax.to('#pinaCola_x5F_right', 1, {
-//     rotation:45, 
-//     repeat: -1, 
-//     yoyo: true,
-//     transformOrigin: 'bottom center'
-// } );
-// TweenMax.to('#pinaCola_x5F_left', 1, {
-//     rotation:-45, 
-//     repeat: -1, 
-//     yoyo: true,
-//     transformOrigin: 'bottom center'
-// } );
 
 
 
