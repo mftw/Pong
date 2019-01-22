@@ -57,7 +57,7 @@ function handleP1Goal() {
     if(playerOneScore == winnerScore) {
         return;
     }
-    playerOneScore = countPlayerScore(playerOneScore, "player1");
+    playerOneScore = countPlayerScore(playerOneScore, "Player1");
     scoreBoard();
 }
 
@@ -75,7 +75,7 @@ function handleP2Goal() {
     if(playerTwoScore == winnerScore) {
         return;
     }
-    playerTwoScore = countPlayerScore(playerTwoScore, "player2");
+    playerTwoScore = countPlayerScore(playerTwoScore, "Player2");
     scoreBoard();
 }
 

@@ -88,7 +88,7 @@ function initGame(alsoMusic = false) {
     y = 0;
     vx = getRandomArbitrary();
     vy = getRandomArbitrary();
-    acc = 2.5;
+    acc = 5;
     paddleSens = 8;
     
     // Prevent the ball from 'stalling' with a steep angle
@@ -221,7 +221,7 @@ function startGame() {
         // Check right collision
         if(x >= bane.centerX + 100 && dirx === -1) {
             vx = -vx;
-            collisionSound(collisionSoundURL);
+            collisionSound('./resources/audio/god-fuck.mp3');
             handleP1Goal();
             resetAfterPoint();
         }
@@ -230,7 +230,9 @@ function startGame() {
         // if(x <= bold.ballSize - bane.centerX && dirx === 1) {
         if(x <= -bane.centerX - 100 && dirx === 1) {
             vx = -vx;
-            collisionSound(collisionSoundURL);
+            // collisionSound(collisionSoundURL);
+            collisionSound('./resources/audio/god-fuck.mp3');
+
             handleP2Goal();
             resetAfterPoint();
         }

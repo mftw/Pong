@@ -50,3 +50,7 @@ button, input {
     font-family:'ZCOOL KuaiLe';
 }
 
+* {
+    user-select: none;
+}
+

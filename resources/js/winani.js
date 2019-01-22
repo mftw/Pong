@@ -6,7 +6,7 @@ var tlm = new TimelineMax();
 
 
 function bg(win) {
-    winner.innerHTML = win + " wins";
+    winner.innerHTML = win + " Wins";
 }
 
 function ani() {
