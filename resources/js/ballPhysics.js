@@ -4,32 +4,16 @@ window.requestInterval = function (fn) {
     var handle = new Object();
 
     // rAF parses a timestamp of the animation
-    // function loop(ms) {
-    //     if(handle.lastTime) {
-    //         // fn.call((ms - handle.lastTime) / 1000);
-    //         fn((ms - handle.lastTime) / 10);
-    //     }
-    //     handle.lastTime = ms;
-    //     handle.value = requestAnimationFrame(loop);
-    // };
-
-    // rAF parses a timestamp of the animation
     handle.loop = (ms) => {
         if(handle.lastTime) {
             let dt = ms - handle.lastTime;
-            // fn.call();
-            // fn((ms - handle.lastTime) / 10);
             fn(dt / 10);
             handle.dt = dt;
         }
         handle.lastTime = ms;
-        // handle.dt = ms - handle.lastTime;
-        // handle.started = true;
-        // handle.value = requestAnimationFrame(loop);
         handle.value = requestAnimationFrame(handle.loop);
     };
 
-    // handle.value = requestAnimationFrame(loop);
     // rAF returns a unique integer per frame, use it to cancelAnimationFrame()
     handle.value = requestAnimationFrame(handle.loop);
     return handle;
@@ -76,7 +60,7 @@ var x,
     paddleSens;
 
 // The acceleration added to the ball when it hits the paddles
-const ballAccelerationFactor = 0.05;
+const ballAccelerationFactor = 0.1;
 
 // The sensitivity added to the paddles when the ball hits.
 const paddleSensAccelerationFactor = 0.005;
@@ -88,6 +72,7 @@ var globalVolume = 0.5;
 
 // Initialize the game variables
 initGame();
+initBgMusic();
 
 var collisionSoundURL = './resources/audio/pop.mp3';
 var paddleCollisionSoundURL = './resources/audio/boing.mp3';
@@ -105,14 +90,6 @@ function initGame(alsoMusic = false) {
     vy = getRandomArbitrary();
     acc = 2.5;
     paddleSens = 8;
-    // bgMusic.playbackRate = 1;
-    // paddleLeftPos = 0;
-    // paddleRightPos = 0;
-
-    // if(Math.abs(vy) < 0.5 || Math.abs(vx) < 0.3) {
-    //     initGame();
-    // }
-
     
     // Prevent the ball from 'stalling' with a steep angle
     if(Math.abs(vx) < 0.3) {
@@ -128,7 +105,8 @@ function initGame(alsoMusic = false) {
         y: y,
         vx: vx,
         vy: vy,
-        acc: acc
+        acc: acc,
+        paddleSens: paddleSens
     }
 }
 
@@ -153,6 +131,7 @@ function startGame() {
     // delayedStartTimer = null;
     // game.started = true;
     // game.loop = 0;
+    // updateBgMusicVolume();
 
     // if (game.started === false || winnerFound) {
     //     return game.started;
@@ -273,7 +252,7 @@ function startGame() {
             acc += ballAccelerationFactor;
 
             // Play music faster for even more stressful fun
-            bgMusic.playbackRate += 0.005;
+            // bgMusic.playbackRate += 0.005;
 
             // It's only fair to make the paddles faster
             // when we make the ball faster ;)
@@ -299,7 +278,7 @@ function startGame() {
             acc += ballAccelerationFactor;
 
             // Play music faster for even more stressful fun
-            bgMusic.playbackRate += 0.005;
+            // bgMusic.playbackRate += 0.005;
 
             // It's only fair to make the paddles faster
             // when we make the ball faster ;)
@@ -327,9 +306,9 @@ function pauseGame(alsoMusic = true) {
     if(game.started === false || game.started === 'undefined') {
         return;
     }
-    if(alsoMusic) {
-        pauseBgMusicLoop();
-    }
+    // if(alsoMusic) {
+    //     pauseBgMusicLoop();
+    // }
     if(game.loop !== 'undefined') {
         cancelAnimationFrame(game.loop.value);
         clearRequestInterval(game.loop);
@@ -398,7 +377,7 @@ var stopBtn = document.getElementById('stop-button');
 var speedx1Btn = document.getElementById('speedx1');
 var speedx2Btn = document.getElementById('speedx2');
 var revBtn = document.getElementById('reverse');
-var startSvgBtn = document.querySelector('.start-svg')
+
 var userStartedGame = false;
 
 startBtn.addEventListener('click', () => {
@@ -428,30 +407,65 @@ revBtn.addEventListener('click', () => {
     vy = -vy;
 });
 
-startSvgBtn.addEventListener('click', handleStartButton);
 
-function handleStartButton(event) {
-    let elm = event.target;
+var startSvgBtn = document.getElementById('play');
+var pauseSvgBtn = document.getElementById('pause');
+
+startSvgBtn.addEventListener('click', handleStartButton);
+pauseSvgBtn.addEventListener('click', handleStartButton);
+
+function handleStartButton() {
+    
     if(game.started === true) {
-        // pauseGame();
-        // updateBgMusicVolume();
-        // bgMusic.play()
+        startSvgBtn.style.display = 'block';
+        pauseSvgBtn.style.display = 'none';
         bgMusic.pause();
         game.started = false;
         TweenMax.pauseAll()
         userStartedGame = false;
-        elm.innerHTML = 'START'
     } else {
-        // startGame();
-        // pauseBgMusicLoop();
-        // startBgMusic();
+        startSvgBtn.style.display = 'none';
+        pauseSvgBtn.style.display = 'block';
         bgMusic.play();
         game.started = true;
-        // console.log(game)
         TweenMax.resumeAll()
         userStartedGame = true;
-        elm.innerHTML = 'PAUSE'
     }
+}
+
+var soundSvgBtn = document.getElementById('Sound');
+var muteSvgBtn = document.getElementById('mute');
+
+soundSvgBtn.addEventListener('click', handleMuteButton);
+muteSvgBtn.addEventListener('click', handleMuteButton);
+
+var lastVol = 0;
+
+function handleMuteButton() {
+
+    if(bgMusic.volume > 0) {
+        muteSvgBtn.style.display = 'block';
+        soundSvgBtn.style.display = 'none';
+        bgMusic.volume = 0;
+        lastVol = globalVolume;
+        globalVolume = 0;
+    } else {
+        muteSvgBtn.style.display = 'none';
+        soundSvgBtn.style.display = 'block';
+        globalVolume = lastVol;
+        updateBgMusicVolume();
+    }
+
+}
+
+var resetSvgBtn = document.getElementById('reset');
+resetSvgBtn.addEventListener('click', handleResetBtn);
+
+function handleResetBtn() { 
+    userStartedGame = false;
+    game.start = false;
+    startSvgBtn.style.display = 'block';
+    pauseSvgBtn.style.display = 'none';
 }
 
 // document.addEventListener('keypress', (e) => {
@@ -468,16 +482,16 @@ function handleStartButton(event) {
 //     }
 // }, false)
 
-document.addEventListener('visibilitychange', handleVisibilityChange, false);
+// document.addEventListener('visibilitychange', handleVisibilityChange, false);
 
-function handleVisibilityChange() {
-    // if (document.visibilityState === 'visible' && userStartedGame) {
-    //     startGame()
-    // } else  {
-    //     pauseGame()
-    // }
-    return;
-}
+// function handleVisibilityChange() {
+//     // if (document.visibilityState === 'visible' && userStartedGame) {
+//     //     startGame()
+//     // } else  {
+//     //     pauseGame()
+//     // }
+//     return;
+// }
 
 var volumeSlider = document.getElementById('volume');
 // output.innerHTML = slider.value; // Display the default slider value
@@ -566,7 +580,6 @@ function collisionSound(sound = '/resources/audio/pop.mp3') {
 // // Make an audio object that contains the nice background music
 // var bgMusic = new Audio('./resources/audio/bg-music.mp3');
 // bgMusic.loop = true;
-
 function startBgMusic(vol = 0.5) {
     bgMusic.play();
     // bgMusic.volume = globalVolume * vol;

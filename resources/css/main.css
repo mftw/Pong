@@ -28,8 +28,28 @@ html, body {
 
 .scores {
     display: none;
+    height: 0;
+    width: 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+}
+
+button, input {
+    display: none;
+    height: 0;
+    width: 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+}
+
+
 }
 
 .st42 {
     font-family:'ZCOOL KuaiLe';
 }
+
