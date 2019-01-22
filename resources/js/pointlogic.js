@@ -1,11 +1,12 @@
 var playerOneScore = 0;
 var playerTwoScore = 0;
-var leftScore = document.getElementById("leftScore");
-var rightScore = document.getElementById("rightScore");
 var p1 = document.getElementById("player1");
 var p2 = document.getElementById("player2");
 var winnerScore = 11;
 var winnerFound = false;
+
+var rightScore = document.getElementById("right_x5F_zero");
+var leftScore = document.getElementById("left_x5F_zero");
 
 function countPlayerScore(counter, win) {
     if(counter == winnerScore - 1) {
@@ -18,8 +19,8 @@ function countPlayerScore(counter, win) {
 }
 
 function scoreBoard() {
-    leftScore.innerHTML = "<h3>" + playerOneScore + "</h3>";
-    rightScore.innerHTML = "<h3>" + playerTwoScore + "</h3>";
+    rightScore.innerHTML = playerTwoScore;
+    leftScore.innerHTML = playerOneScore;
 }
 
 function resetScoreboard() {
@@ -32,8 +33,9 @@ function resetScoreboard() {
 }
 
 function winSituation(win) {
-    console.log("Whatever der nu sker når en vinder");
     bg(win);
+    svg.style.visibility = "visible";
+    tlm.restart();
     winnerSong();
 }
 
@@ -51,14 +53,13 @@ function winSituation(win) {
 p1.addEventListener("click", handleP1Goal, false);
 
 function handleP1Goal() {
-    playerOneScore.innerHTML = "<h3>" + playerOneScore + "</h3>";
+    playerOneScore = playerOneScore;
     if(playerOneScore == winnerScore) {
         return;
     }
     playerOneScore = countPlayerScore(playerOneScore, "player1");
     scoreBoard();
 }
-
 
 // p2.addEventListener("click", function() {
 //     if(playerTwoScore == winnerScore) {
@@ -86,7 +87,7 @@ document.getElementById("reset").addEventListener("click", function() {
 
 // var audio = new Audio('./resources/audio/goe.mp3');
 var audio = new Audio('./resources/audio/winnerMusic.mp3');
-function winnerSong(reset = true) {
+function winnerSong(reset = true, ad) {
 
     if(reset === false) {
         if(audio) {
@@ -98,6 +99,12 @@ function winnerSong(reset = true) {
     // audio = new Audio('./resources/audio/goe.mp3');
     audio.volume = globalVolume;
     audio.play();
+
+    var ad = audio.duration;
+    
+    // console.log(ad);
 }
 
-(resetScoreboard());
+function getDur() {
+    return parseFloat(audio.duration);
+}

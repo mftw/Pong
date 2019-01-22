@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'ZCOOL KuaiLe';
+    font-style: normal;
+    font-weight: 400;
+    src: local('ZCOOLKuaiLe-Regular'), local('ZCOOLKuaiLe-Regular'), url(https://fonts.gstatic.com/s/zcoolkuaile/v2/tssqApdaRQokwFjFJjvM6h2Wo-Tpo2MpsrpYU3EJjXfOiTrBdUtGm0PGsPHkbHZzpr3G.4.woff2) format('woff2');
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -21,4 +28,8 @@ html, body {
 
 .scores {
     display: none;
+}
+
+.st42 {
+    font-family:'ZCOOL KuaiLe';
 }
