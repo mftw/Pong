@@ -84,7 +84,8 @@ document.getElementById("reset").addEventListener("click", function() {
     userStartedGame = false;
 });
 
-var audio = new Audio('./resources/audio/goe.mp3');
+// var audio = new Audio('./resources/audio/goe.mp3');
+var audio = new Audio('./resources/audio/winnerMusic.mp3');
 function winnerSong(reset = true) {
 
     if(reset === false) {

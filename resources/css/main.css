@@ -18,3 +18,7 @@ html, body {
     user-select: none;
     fill: red;
 }
+
+.scores {
+    display: none;
+}
