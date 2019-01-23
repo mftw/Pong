@@ -1,4 +1,10 @@
-@import url("https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe");
+  @font-face {
+    font-family: 'ZCOOL KuaiLe';
+    font-style: normal;
+    font-weight: 400;
+    src: local('ZCOOL KuaiLe Regular'), local('ZCOOLKuaiLe-Regular'), url(../font/ZCOOLKuaiLe-Regular.ttf) format('truetype');
+  }
+
 * {
   margin: 0;
   padding: 0;
@@ -7,4 +13,10 @@
 .st42 {
   font-family: 'ZCOOL KuaiLe', cursive;
 }
-/*# sourceMappingURL=style.css.map */
+
+body {
+    /* background: #E4D3BB; */
+    background: linear-gradient(to top,#E4D3BB 0%, #FAF2D9 14.35%, #FFF3E3 25.89%, #ECEFBD 40.24%, #D9A037 56.86%,#D7761B 71.16%,#751F18 85.07%,#350816 100%);
+    background-repeat: no-repeat;
+    background-color: #E4D3BB;
+}

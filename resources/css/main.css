@@ -1,9 +1,9 @@
-@font-face {
+/* @font-face {
     font-family: 'ZCOOL KuaiLe';
     font-style: normal;
     font-weight: 400;
     src: local('ZCOOLKuaiLe-Regular'), local('ZCOOLKuaiLe-Regular'), url(https://fonts.gstatic.com/s/zcoolkuaile/v2/tssqApdaRQokwFjFJjvM6h2Wo-Tpo2MpsrpYU3EJjXfOiTrBdUtGm0PGsPHkbHZzpr3G.4.woff2) format('woff2');
-}
+} */
 
 html, body {
     margin: 0;
@@ -19,11 +19,6 @@ html, body {
 
 .start-svg {
     cursor: pointer;
-}
-
-.start-svg:active {
-    user-select: none;
-    fill: red;
 }
 
 .scores {
@@ -46,11 +41,16 @@ button, input {
     visibility: hidden;
 }
 
-.st42 {
-    font-family:'ZCOOL KuaiLe';
-}
-
 * {
     user-select: none;
 }
 
+.buttons g {
+    cursor: pointer;
+}
+
+.no-cursor {
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjbQg61aAAAADUlEQVQYV2P4//8/IwAI/QL/+TZZdwAAAABJRU5ErkJggg=='),
+    /* url(images/blank.cur), */
+    none !important; 
+}

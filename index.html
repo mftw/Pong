@@ -572,7 +572,7 @@
 		<path class="st40" d="M1461.4-2.7v114.3c0,2-1.8,3.6-3.9,3.6l0,0c-2.1,0-3.9-1.7-3.9-3.6V-2.7H1461.4z"/>
 		<text transform="matrix(1 0 0 1 1255.6591 202.4641)" class="st41 st42 st43">Player 2</text>
 	</g>
-	<g id="Buttons">
+    <g id="Buttons" class="buttons">
 		<g id="play">
 			<path class="st44" d="M1804.4,40.4l-37.3-21.5c-1.3-0.8-2.9,0.2-2.9,1.7v43c0,1.5,1.6,2.4,2.9,1.7l37.3-21.5
 				C1805.7,42.9,1805.7,41.2,1804.4,40.4z"/>
@@ -613,28 +613,24 @@
 	
 
 
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/ModifiersPlugin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/plugins/TextPlugin.min.js"></script>
-     <script src="./resources/js/paddles.js"></script>
-    <script src="./resources/js/pointlogic.js"></script>
-    <script src="./resources/js/winani.js"></script>
-    <script src="./resources/js/ballPhysics.js"></script> 
+<script src="./resources/js/vendor/TweenMax.min.js"></script>
+<script src="./resources/js/paddles.js"></script>
+<script src="./resources/js/pointlogic.js"></script>
+<script src="./resources/js/ballPhysics.js"></script> 
+<script src="./resources/js/winani.js"></script>
 <script>
 var tl = new TimelineMax({
+    force3D: true,
 	repeat: -1, 
 	repeatDelay: 0.5,
 	yoyo: true,
 });
 var tl1 = new TimelineMax({
+    force3D: true,
 	repeat: -1, 
 	repeatDelay: 0.5,
 	yoyo: true,
 });
-
-
 
 tl.set('#pinaCola_x5F_right',{
 	transformOrigin: 'bottom center', 
@@ -654,21 +650,23 @@ tl1.set('#pinaCola_x5F_left',{
 	yoyo: true,
 	ease: Power1.easeInOut});
 	
-	TweenMax.to('.st3', 5, { 
-		repeat: -1, 
-		transformOrigin: 'center',
-		ease: Power4.easeInOut,
-		rotation: -5,
-		yoyo: true, 
-		   });
+TweenMax.to('.st3', 5, {
+    force3D: true, 
+	repeat: -1, 
+	transformOrigin: 'center',
+	ease: Power4.easeInOut,
+	rotation: -5,
+	yoyo: true, 
+});
 
-	TweenMax.to('.st4', 5, { 
-		transformOrigin: 'bottom',
-		repeat: -1, 
-		ease: Power4.easeInOut,
-		rotation: -5,
-		yoyo: true, 
-		   });
+TweenMax.to('.st4', 5, { 
+    force3D: true,
+	transformOrigin: 'bottom',
+	repeat: -1, 
+	ease: Power4.easeInOut,
+	rotation: -5,
+	yoyo: true, 
+});
 
 
 

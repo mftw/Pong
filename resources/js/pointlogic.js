@@ -2,7 +2,7 @@ var playerOneScore = 0;
 var playerTwoScore = 0;
 var p1 = document.getElementById("player1");
 var p2 = document.getElementById("player2");
-var winnerScore = 11;
+var winnerScore = 3;
 var winnerFound = false;
 
 var rightScore = document.getElementById("right_x5F_zero");
@@ -10,9 +10,9 @@ var leftScore = document.getElementById("left_x5F_zero");
 
 function countPlayerScore(counter, win) {
     if(counter == winnerScore - 1) {
-        console.log("winner: " + win);
+        // console.log("winner: " + win);
         winnerFound = true;
-        cancelDelayedStart();
+        handleResetButton();
         winSituation(win);
     }
     return counter + 1;
@@ -34,8 +34,8 @@ function resetScoreboard() {
 
 function winSituation(win) {
     bg(win);
-    svg.style.visibility = "visible";
-    tlm.restart();
+    // svg.style.visibility = "visible";
+    // tlm.restart();
     winnerSong();
 }
 
@@ -79,11 +79,11 @@ function handleP2Goal() {
     scoreBoard();
 }
 
-document.getElementById("reset").addEventListener("click", function() {
-    resetScoreboard();
-    resetGame()
-    userStartedGame = false;
-});
+// document.getElementById("reset").addEventListener("click", function() {
+//     resetScoreboard();
+//     resetGame()
+//     userStartedGame = false;
+// });
 
 // var audio = new Audio('./resources/audio/goe.mp3');
 var audio = new Audio('./resources/audio/winnerMusic.mp3');
@@ -98,12 +98,11 @@ function winnerSong(reset = true, ad) {
     }
     // audio = new Audio('./resources/audio/goe.mp3');
     audio.volume = globalVolume;
-    audio.play();
-
-    var ad = audio.duration;
-    
+    audio.play();    
     // console.log(ad);
 }
+
+
 
 function getDur() {
     return parseFloat(audio.duration);

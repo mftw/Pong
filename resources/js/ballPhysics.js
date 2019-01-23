@@ -1,4 +1,5 @@
-// var lastTime;
+// Add a global function that uses requestAnimationFrame
+// and has a similar syntax to setInterval, but more performant
 window.requestInterval = function (fn) {
 
     var handle = new Object();
@@ -41,10 +42,6 @@ bane.centerY = parseFloat(bane.getBBox().height / 2);
 var bold = document.getElementById('Cocunut');
 bold.ballSize = parseFloat(bold.firstElementChild.getAttribute('r'));
 
-// Make an audio object that contains the nice background music
-var bgMusic = new Audio('./resources/audio/bg-music.mp3');
-bgMusic.loop = true;
-
 // This variable contains the game loop
 var game = {
     started: false,
@@ -70,17 +67,25 @@ const paddleSensAccelerationFactor = 0.005;
 var globalVolume = 0.5;
 // var globalVolume = 0;
 
-// Initialize the game variables
-initGame();
-initBgMusic();
-
-var collisionSoundURL = './resources/audio/pop.mp3';
-var paddleCollisionSoundURL = './resources/audio/boing.mp3';
+const collisionSoundURL = './resources/audio/pop.mp3';
+const paddleCollisionSoundURL = './resources/audio/boing.mp3';
+const scoreSoundURL = './resources/audio/god-fuck.mp3';
+const backgroundMusicURL = './resources/audio/bg-music.mp3';
 // var collisionSoundURL = './resources/audio/basketBall.mp3';
 // var collisionSoundURL = './resources/audio/basketBall2.mp3';
 // var collisionSoundURL = './resources/audio/pingPongBall.mp3';
 
+// Make an audio object that contains the nice background music
+var bgMusic = new Audio(backgroundMusicURL);
+bgMusic.loop = true;
 
+// Initialize the game variables
+initGame();
+
+// Initialize the music
+initBgMusic();
+
+// Start the game loop without starting the game
 startGame();
 
 function initGame(alsoMusic = false) {
@@ -125,24 +130,7 @@ function getRandomArbitrary(min = 0.2, max = 1) {
 }
 
 
-
 function startGame() {
-    // clearTimeout(delayedStartTimer);
-    // delayedStartTimer = null;
-    // game.started = true;
-    // game.loop = 0;
-    // updateBgMusicVolume();
-
-    // if (game.started === false || winnerFound) {
-    //     return game.started;
-    // }
-    // if (winnerFound) {
-    //     return game;
-    // }
-
-    // if(userStartedGame) {
-    //     startBgMusic();
-    // }
 
     let config = {
         x: x,
@@ -221,7 +209,7 @@ function startGame() {
         // Check right collision
         if(x >= bane.centerX + 100 && dirx === -1) {
             vx = -vx;
-            collisionSound('./resources/audio/god-fuck.mp3');
+            collisionSound(scoreSoundURL);
             handleP1Goal();
             resetAfterPoint();
         }
@@ -231,7 +219,7 @@ function startGame() {
         if(x <= -bane.centerX - 100 && dirx === 1) {
             vx = -vx;
             // collisionSound(collisionSoundURL);
-            collisionSound('./resources/audio/god-fuck.mp3');
+            collisionSound(scoreSoundURL);
 
             handleP2Goal();
             resetAfterPoint();
@@ -313,7 +301,7 @@ function pauseGame(alsoMusic = true) {
     // }
     if(game.loop !== 'undefined') {
         cancelAnimationFrame(game.loop.value);
-        clearRequestInterval(game.loop);
+        // clearRequestInterval(game.loop);
     }
     game.started = false;
     // game = null;
@@ -322,6 +310,7 @@ function pauseGame(alsoMusic = true) {
 function resetGame() {
     // pauseGame(alsoMusic);
     game.started = false;
+    userStartedGame = false;
     resetPaddles();
     stopBgMusic();
     initGame();
@@ -329,15 +318,6 @@ function resetGame() {
 }
 
 function resetAfterPoint(startDelay = 1000) {
-    // resetGame(alsoMusic = false);
-    // delayedStart(startDelay);
-    // delayedStartTimer = setTimeout(() => {
-    //     startGame();
-    //     // clearTimeout(delayedStartTimer);
-    //     // delayedStartTimer = null;
-    //     cancelDelayedStart();
-    //     console.log('timer fired');
-    // }, startDelay)
     x = 0;
     y = 0;
     vx = 0;
@@ -346,40 +326,8 @@ function resetAfterPoint(startDelay = 1000) {
     setTimeout(initGame, startDelay)
 }
 
-var delayedStartTimer = null;
-function delayedStart(delay = 1000) {
-    cancelDelayedStart();
-
-    function delayThatStart() {
-        startGame();
-        // clearTimeout(delayedStartTimer);
-        // delayedStartTimer = null;
-        cancelDelayedStart();
-        console.log('timer fired');
-    }
-
-    delayedStartTimer = setTimeout(delayThatStart, delay);
-    // delayedStartTimer = setTimeout(() => {
-    //     startGame();
-    //     // clearTimeout(delayedStartTimer);
-    //     // delayedStartTimer = null;
-    //     cancelDelayedStart();
-    //     console.log('timer fired');
-    // }, delay)
-}
-
-
-function cancelDelayedStart() {
-    clearTimeout(delayedStartTimer);
-    delayedStartTimer = null;
-}
 
 var startBtn = document.getElementById('start-button');
-var stopBtn = document.getElementById('stop-button');
-var speedx1Btn = document.getElementById('speedx1');
-var speedx2Btn = document.getElementById('speedx2');
-var revBtn = document.getElementById('reverse');
-
 var userStartedGame = false;
 
 startBtn.addEventListener('click', () => {
@@ -390,19 +338,31 @@ startBtn.addEventListener('click', () => {
     userStartedGame = true;
 });
 
+
+var stopBtn = document.getElementById('stop-button');
+
 stopBtn.addEventListener('click', () => {
     pauseGame();
     TweenMax.pauseAll()
     userStartedGame = false;
 });
 
+
+var speedx1Btn = document.getElementById('speedx1');
+
 speedx1Btn.addEventListener('click', () => {
     acc -= 1;
 });
 
+
+var speedx2Btn = document.getElementById('speedx2');
+
 speedx2Btn.addEventListener('click', () => {
     acc += 1;
 });
+
+
+var revBtn = document.getElementById('reverse');
 
 revBtn.addEventListener('click', () => {
     vx = -vx;
@@ -461,52 +421,61 @@ function handleMuteButton() {
 }
 
 var resetSvgBtn = document.getElementById('reset');
-resetSvgBtn.addEventListener('click', handleResetBtn);
+resetSvgBtn.addEventListener('click', handleResetButton);
 
-function handleResetBtn() { 
+// var startTime = new Date();
+// var handleResetButton = () => {
+function handleResetButton() {
+    // let caller = this.caller;
+    // console.log(caller);
+    // alert("caller is " + caller); 
+    // alert(new Date() - startTime)
     userStartedGame = false;
-    game.start = false;
+    game.started = false;
     startSvgBtn.style.display = 'block';
     pauseSvgBtn.style.display = 'none';
+    resetScoreboard();
+    resetGame()
+    resetWinAni()    
 }
 
-// document.addEventListener('keypress', (e) => {
-//     if(e.key === ' ') {
-//         if(!userStartedGame) {
-//             startGame()
-//             userStartedGame = true;
-//             TweenMax.resumeAll();
-//         } else {
-//             pauseGame();
-//             userStartedGame = false;
-//             TweenMax.pauseAll();
-//         }
-//     }
-// }, false)
+document.addEventListener('visibilitychange', handleVisibilityChange, false);
 
-// document.addEventListener('visibilitychange', handleVisibilityChange, false);
+function handleVisibilityChange() {
+    if (document.visibilityState !== 'visible' && userStartedGame) {
+        startSvgBtn.style.display = 'block';
+        pauseSvgBtn.style.display = 'none';
+        bgMusic.pause();
+        TweenMax.pauseAll();
+        game.started = false;
+    } 
+}
 
-// function handleVisibilityChange() {
-//     // if (document.visibilityState === 'visible' && userStartedGame) {
-//     //     startGame()
-//     // } else  {
-//     //     pauseGame()
-//     // }
-//     return;
-// }
+document.addEventListener('keypress', e => {
+    if(e.key === ' ') {
+        e.preventDefault();
+        handleStartButton();
+    }
+})
+
+
+var mouseTimeout;
+document.onmousemove = () => {
+    document.body.classList.remove('no-cursor');
+    clearTimeout(mouseTimeout);
+    mouseTimeout = setTimeout(() => {
+        document.body.classList.add('no-cursor')
+    }, 5000);
+}
 
 var volumeSlider = document.getElementById('volume');
 // output.innerHTML = slider.value; // Display the default slider value
 
 // Update the current slider value (each time you drag the slider handle)
 volumeSlider.oninput = function() {
-    // console.log(this.value / 100)
     globalVolume = this.value / 100;
     updateBgMusicVolume();
 }
-
-
-
 
 
 window.clearRequestInterval = function (handle) {
@@ -566,25 +535,16 @@ function playBeep(freq = 400, time = 100, type = 'square') {
     }, time);
 }
 
-// var audio = null;
-// var collisionAudio = new Audio('/resources/audio/pop.mp3');
-function collisionSound(sound = '/resources/audio/pop.mp3') {
-// function collisionSound() {
+
+function collisionSound(sound = '/resources/audio/pop.mp3', vol = 1) {
     var audio = new Audio(sound);
-    audio.volume = globalVolume;
+    audio.volume = globalVolume * vol;
     audio.play();
-    // collisionAudio.volume = globalVolume;
-    // collisionAudio.currentTime = 0;
-    // collisionAudio.play();
 }
 
-// // var bgMusic = new Audio('./resources/audio/goe.mp3');
-// // Make an audio object that contains the nice background music
-// var bgMusic = new Audio('./resources/audio/bg-music.mp3');
-// bgMusic.loop = true;
+
 function startBgMusic(vol = 0.5) {
     bgMusic.play();
-    // bgMusic.volume = globalVolume * vol;
     updateBgMusicVolume(vol);
     return bgMusic;
 }

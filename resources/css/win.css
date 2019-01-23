@@ -2,14 +2,18 @@
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
-    src: local('Raleway'), local('Raleway-Regular'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2');
-    
-  }
-  .st-9{
-      font-family:'Raleway';
-      
-    }
+    /* src: local('Raleway'), local('Raleway-Regular'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2'); */
+    src: local('Raleway'), local('Raleway-Regular'), url(../font/Raleway-Regular.woff2) format('woff2');
 
+}
+
+.st-9 {
+    font-family: 'Raleway';
+}
+
+/*
+* ID i CSS... Puuuh ha.
+*/
 #svg {
     width: 50%;
     visibility: hidden;
