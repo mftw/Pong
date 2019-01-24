@@ -1,28 +1,207 @@
-self.addEventListener('install', function (event) {
-    console.log('SW Installed');
-    event.waitUntil(
-    caches.open('static')
-        .then(function (cache) {
-           //cache.add('/');
-           //cache.add('/index.html');
-           //cache.add('/src/js/app.js');
-            cache.addAll([
-                '/',
-                './index.html',
-                './resources/js/vendor/TweenMax.min.js',
-                './resources/js/app.js',
-                './resources/js/ballPhysics.js',
-                './resources/js/paddles.js',
-                './resources/js/pointlogic.js',
-                './resources/js/winani.js',
-                './resources/css/main.css',
-                './resources/css/style.css',
-                './resources/css/win.css',
-            ]);
-        })
-    );
-});
+/**
+ * Welcome to your Workbox-powered service worker!
+ *
+ * You'll need to register this file in your web app and you should
+ * disable HTTP caching for this file too.
+ * See https://goo.gl/nhQhGp
+ *
+ * The rest of the code is auto-generated. Please don't update this file
+ * directly; instead, make changes to your Workbox build configuration
+ * and re-run your build process.
+ * See https://goo.gl/2aRDsh
+ */
 
-self.addEventListener('activate', event => {
-    console.log('SW Activated');
-});
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+
+workbox.skipWaiting();
+workbox.clientsClaim();
+
+/**
+ * The workboxSW.precacheAndRoute() method efficiently caches and responds to
+ * requests for URLs in the manifest.
+ * See https://goo.gl/S9QRab
+ */
+self.__precacheManifest = [
+  {
+    "url": "android-chrome-192x192.png",
+    "revision": "455569a6a62a344bb5d1e4da09be9fda"
+  },
+  {
+    "url": "android-chrome-512x512.png",
+    "revision": "8ed503ba55a8ec6f3996972b8ef44526"
+  },
+  {
+    "url": "apple-touch-icon.png",
+    "revision": "398d7bb6edafa64c1fc89cf4930011d7"
+  },
+  {
+    "url": "eksempel/index.1.html",
+    "revision": "58066eb694b17bd0ef28418246f89e2f"
+  },
+  {
+    "url": "eksempel/index.html",
+    "revision": "ac997b37ffc8461ec9be88e614829640"
+  },
+  {
+    "url": "eksempel/sound.js",
+    "revision": "603d99567189f48d27f2a985a102d6d2"
+  },
+  {
+    "url": "favicon-16x16.png",
+    "revision": "260fc3855eae98d0130e98c6192b1419"
+  },
+  {
+    "url": "favicon-32x32.png",
+    "revision": "0002c1b2f5b4fcf99da92a6625a21a9a"
+  },
+  {
+    "url": "gulpfile.js",
+    "revision": "510166c77cb27482c8fe5dce9de6f013"
+  },
+  {
+    "url": "img/Baech_pong01.svg",
+    "revision": "bf05f3ea0730be7816540020c75f64b4"
+  },
+  {
+    "url": "img/Baech_pong02.svg",
+    "revision": "2654d3f19634275f31533d655a3fc779"
+  },
+  {
+    "url": "img/baneMedPaddles.svg",
+    "revision": "1e3d86640afac094513782bffe6a47f2"
+  },
+  {
+    "url": "img/bg.svg",
+    "revision": "e86a4d4cb78394a674ade51fc04c2d2a"
+  },
+  {
+    "url": "img/Coconutball.svg",
+    "revision": "036c74457ff90cbf4171df250d6d72ec"
+  },
+  {
+    "url": "img/paddle_left.svg",
+    "revision": "3b2fc154a7ba57f17757d395be31808c"
+  },
+  {
+    "url": "img/paddle_right.svg",
+    "revision": "518521253c67e6a6eef921c2a4d184c3"
+  },
+  {
+    "url": "img/win.svg",
+    "revision": "acbb1e87b522391f99addd2e05ac43ed"
+  },
+  {
+    "url": "img/win001.svg",
+    "revision": "89806f3c0aaba1ae4e288236c7ea0e92"
+  },
+  {
+    "url": "img/win01.svg",
+    "revision": "12ab74fa50ec81fab82ee4c7e1292f72"
+  },
+  {
+    "url": "index.html",
+    "revision": "0b4c60051e330e7eba8253a6c3306b81"
+  },
+  {
+    "url": "mstile-150x150.png",
+    "revision": "653806cf861186c5ca1e1ec2239f207c"
+  },
+  {
+    "url": "resources/css/main.css",
+    "revision": "073f0a671bb800ffb3d7a856f1646823"
+  },
+  {
+    "url": "resources/css/style.css",
+    "revision": "2c97d6e612c4624a7fa5a260840c721f"
+  },
+  {
+    "url": "resources/css/win.css",
+    "revision": "9b8ed03c6454fa03aaf9f8f064ef4a59"
+  },
+  {
+    "url": "resources/img/Baech_pong.png",
+    "revision": "3bdc3e8761a78941572f08286ca764cd"
+  },
+  {
+    "url": "resources/img/Baech_pong.svg",
+    "revision": "684224d1d6105d970cab59a2130d7a46"
+  },
+  {
+    "url": "resources/img/Baech_pong01.svg",
+    "revision": "74c58a2950806a480deb5a58887991a1"
+  },
+  {
+    "url": "resources/img/Baech_pong02.svg",
+    "revision": "d5615dcce247d4d994fc8a82c3abd7bd"
+  },
+  {
+    "url": "resources/img/bane_orang.svg",
+    "revision": "4f90cb72361f68b1b6d8d73c3b529896"
+  },
+  {
+    "url": "resources/img/bg.svg",
+    "revision": "1903167be82ba8d0f726eda8bce65eaa"
+  },
+  {
+    "url": "resources/img/Coconutball.svg",
+    "revision": "b5076da06f23a879308c593a4efc38b6"
+  },
+  {
+    "url": "resources/img/paddle_left.svg",
+    "revision": "817f6a0694f364ce1771f64c0c85f3b7"
+  },
+  {
+    "url": "resources/img/paddle_right.svg",
+    "revision": "659dee9153e7f49520c459c9c791a55c"
+  },
+  {
+    "url": "resources/img/win01.svg",
+    "revision": "cce3336dcd6d0a1149c028ce45ae1c34"
+  },
+  {
+    "url": "resources/js/app.js",
+    "revision": "0f9ac736dde124fdef2babd8e11944d5"
+  },
+  {
+    "url": "resources/js/ballPhysics.js",
+    "revision": "2ff0267048a31799df084a1295dc7cc3"
+  },
+  {
+    "url": "resources/js/paddle-mk-snavs.js",
+    "revision": "b2b85729ef74fa82be1e27e2137c2e7f"
+  },
+  {
+    "url": "resources/js/paddles.js",
+    "revision": "56a61c2420923bb864fb2025c32a6855"
+  },
+  {
+    "url": "resources/js/pointlogic.js",
+    "revision": "b834424c167caa17294203f7097ca3ad"
+  },
+  {
+    "url": "resources/js/vendor/TweenMax.min.js",
+    "revision": "a45cae99e26730eb693b5acdf7bd4538"
+  },
+  {
+    "url": "resources/js/winani.js",
+    "revision": "85fbeb015cf20d1d141e912e19b88d0a"
+  },
+  {
+    "url": "safari-pinned-tab.svg",
+    "revision": "f46a0ce75ac0a7306571e81929cffb9f"
+  },
+  {
+    "url": "showHide.js",
+    "revision": "6cf4e2dbe79cb6500417b091ea7c689a"
+  },
+  {
+    "url": "sw-register.js",
+    "revision": "2805af5dc5383274f9ce09445991e005"
+  },
+  {
+    "url": "sw.org.js",
+    "revision": "69949f5bc0d2a5356f6095e1506ccc24"
+  }
+].concat(self.__precacheManifest || []);
+workbox.precaching.suppressWarnings();
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
