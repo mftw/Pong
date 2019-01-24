@@ -49,38 +49,46 @@ if(mobileAndTabletcheck || forceMobile) {
     let p2TouchKeyUp = document.getElementById('upCon_1_');
     let p2TouchKeyDown = document.getElementById('downCon_1_');
 
-    p1TouchKeyUp.addEventListener('touchstart', () => {
+    p1TouchKeyUp.addEventListener('touchstart', e => {
+        e.preventDefault()
         keyPressed.paddleLeftUp = true;
     })
     
-    p1TouchKeyUp.addEventListener('touchend', () => {
+    p1TouchKeyUp.addEventListener('touchend', e => {
+        e.preventDefault()
         keyPressed.paddleLeftUp = false;
     })
     
-    p1TouchKeyDown.addEventListener('touchstart', () => {
+    p1TouchKeyDown.addEventListener('touchstart', e => {
+        e.preventDefault()
         keyPressed.paddleLeftDown = true;
     })
     
-    p1TouchKeyDown.addEventListener('touchend', () => {
+    p1TouchKeyDown.addEventListener('touchend', e => {
+        e.preventDefault()
         keyPressed.paddleLeftDown = false;
     })
     
 
 
-    
-    p2TouchKeyUp.addEventListener('touchstart', () => {
+
+    p2TouchKeyUp.addEventListener('touchstart', e => {
+        e.preventDefault()
         keyPressed.paddleRightUp = true;
     })
     
-    p2TouchKeyUp.addEventListener('touchend', () => {
+    p2TouchKeyUp.addEventListener('touchend', e => {
+        e.preventDefault()
         keyPressed.paddleRightUp = false;
     })
     
-    p2TouchKeyDown.addEventListener('touchstart', () => {
+    p2TouchKeyDown.addEventListener('touchstart', e => {
+        e.preventDefault()
         keyPressed.paddleRightDown = true;
     })
     
-    p2TouchKeyDown.addEventListener('touchend', () => {
+    p2TouchKeyDown.addEventListener('touchend', e => {
+        e.preventDefault()
         keyPressed.paddleRightDown = false;
     })
 }
