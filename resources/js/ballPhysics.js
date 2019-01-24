@@ -48,6 +48,11 @@ var game = {
     loop: 0
 };
 
+var ai = {
+    active: true,
+    difficulty: 3,
+}
+
 // Working variables for the game
 var x,
     y,
@@ -171,13 +176,30 @@ function startGame() {
         // x += vx * acc;
         // y += vy * acc;
 
+        // Get the direction of the ball.
+        let dirx = whichDir(lastX, x);
+        let diry = whichDir(lastY, y);
+
         // Check if a players are moving paddles
-        if(paddleLeftPos <= bane.centerY - paddleLeft.halfHeight && keyPressed.paddleLeftDown) {
-            paddleLeftPos += paddleSens;
+        if(paddleLeftPos <= bane.centerY - paddleLeft.halfHeight && 
+            (keyPressed.paddleLeftDown || ai.active)) {
+
+            if(ai.active && diry === 1) {
+                paddleLeftPos = y / ai.difficulty;
+            } else {
+                paddleLeftPos += paddleSens;
+            }
         }
         
-        if(paddleLeftPos >= paddleLeft.halfHeight - bane.centerY && keyPressed.paddleLeftUp) {
-            paddleLeftPos -= paddleSens;
+        if(paddleLeftPos >= paddleLeft.halfHeight - bane.centerY && 
+            (keyPressed.paddleLeftUp || ai.active)) {
+
+            if(ai.active && diry === -1) {
+                paddleLeftPos = y / ai.difficulty;
+                // console.log
+            } else {
+                paddleLeftPos -= paddleSens;
+            }
         }
         
         if(paddleRightPos <= bane.centerY - paddleRight.halfHeight && keyPressed.paddleRightDown) {
@@ -187,10 +209,6 @@ function startGame() {
         if(paddleRightPos >= paddleRight.halfHeight - bane.centerY && keyPressed.paddleRightUp) {
             paddleRightPos -= paddleSens;
         }
-
-        // Get the direction of the ball.
-        let dirx = whichDir(lastX, x);
-        let diry = whichDir(lastY, y);
 
         // Check bottom collision
         if(y >= bane.centerY - bold.ballSize && diry === -1) {
