@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<!-- <link href="https://fonts.googleapis.com/css?family=ZCOOL+KuaiLe" rel="stylesheet"> -->
@@ -162,7 +161,6 @@
 		.st39{fill-rule:evenodd;clip-rule:evenodd;fill:#D1AC4E;}
 		.st40{fill-rule:evenodd;clip-rule:evenodd;fill:#4A2714;}
 		.st41{fill:#FFCC99;}
-		.st42{}
 		.st43{font-size:60px;}
 		.st44{fill:#D9A037;}
 		.st45{display:inline;fill:#D9A037;}
@@ -614,52 +612,53 @@
 
 
 <script src="./resources/js/vendor/TweenMax.min.js"></script>
+<script src="./resources/js/app.js"></script>
 <script src="./resources/js/paddles.js"></script>
 <script src="./resources/js/pointlogic.js"></script>
 <script src="./resources/js/ballPhysics.js"></script> 
 <script src="./resources/js/winani.js"></script>
 <script>
-var tl = new TimelineMax({
-    force3D: true,
-	repeat: -1, 
-	repeatDelay: 0.5,
-	yoyo: true,
-});
-var tl1 = new TimelineMax({
-    force3D: true,
-	repeat: -1, 
-	repeatDelay: 0.5,
-	yoyo: true,
-});
-
-tl.set('#pinaCola_x5F_right',{
-	transformOrigin: 'bottom center', 
-	rotation: -10,
-	ease: Power4.easeInOut})
+	var tl = new TimelineMax({
+		force3D: true,
+		repeat: -1, 
+		repeatDelay: 0.5,
+		yoyo: true,
+	});
+	var tl1 = new TimelineMax({
+		force3D: true,
+		repeat: -1, 
+		repeatDelay: 0.5,
+		yoyo: true,
+	});
+	
+	tl.set('#pinaCola_x5F_right',{
+		transformOrigin: 'bottom center', 
+		rotation: -10,
+		ease: Power4.easeInOut})
 .to('#pinaCola_x5F_right', 3, {
 	rotation: 10,
 	yoyo: true,
 	ease: Power1.easeInOut});
 	
-tl1.set('#pinaCola_x5F_left',{
-	transformOrigin: 'bottom center', 
-	rotation: -10,
-	ease: Power4.easeInOut})
-.to('#pinaCola_x5F_left', 3, {
-	rotation: 10,
-	yoyo: true,
-	ease: Power1.easeInOut});
-	
-TweenMax.to('.st3', 5, {
-    force3D: true, 
-	repeat: -1, 
-	transformOrigin: 'center',
-	ease: Power4.easeInOut,
-	rotation: -5,
-	yoyo: true, 
-});
-
-TweenMax.to('.st4', 5, { 
+	tl1.set('#pinaCola_x5F_left',{
+		transformOrigin: 'bottom center', 
+		rotation: -10,
+		ease: Power4.easeInOut})
+		.to('#pinaCola_x5F_left', 3, {
+			rotation: 10,
+			yoyo: true,
+			ease: Power1.easeInOut});
+			
+			TweenMax.to('.st3', 5, {
+				force3D: true, 
+				repeat: -1, 
+				transformOrigin: 'center',
+				ease: Power4.easeInOut,
+				rotation: -5,
+				yoyo: true, 
+			});
+			
+			TweenMax.to('.st4', 5, { 
     force3D: true,
 	transformOrigin: 'bottom',
 	repeat: -1, 
@@ -672,6 +671,15 @@ TweenMax.to('.st4', 5, {
 
 
 </script>   
+<!-- <script>
+	// Check that service workers are registered
+	if ('serviceWorker' in navigator) {
+		// Use the window load event to keep the page load performant
+		window.addEventListener('load', () => {
+			navigator.serviceWorker.register('/sw.js');
+		});
+	}
+</script> -->
 </body>
 
 </html>

@@ -439,7 +439,7 @@ function handleResetButton() {
     resetWinAni()    
 }
 
-document.addEventListener('visibilitychange', handleVisibilityChange, false);
+// document.addEventListener('visibilitychange', handleVisibilityChange, false);
 
 function handleVisibilityChange() {
     if (document.visibilityState !== 'visible' && userStartedGame) {
