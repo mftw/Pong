@@ -34,7 +34,9 @@ aiBt.addEventListener("click", function() {
         ai.active = true;
     } else {
         aiLine.style.display = "block"
-        leftControl.style.display = "block";
+        if (isMobileDevice()) {
+            leftControl.style.display = "block";
+        }
         ai.active = false;
     }
 })
