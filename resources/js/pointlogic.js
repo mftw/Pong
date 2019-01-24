@@ -87,7 +87,7 @@ function handleP2Goal() {
 
 // var audio = new Audio('./resources/audio/goe.mp3');
 var audio = new Audio('./resources/audio/winnerMusic.mp3');
-function winnerSong(reset = true, ad) {
+function winnerSong(reset = true, vol = 1) {
 
     if(reset === false) {
         if(audio) {
@@ -97,8 +97,8 @@ function winnerSong(reset = true, ad) {
         return;
     }
     // audio = new Audio('./resources/audio/goe.mp3');
-    audio.volume = globalVolume;
-    audio.play();    
+    audio.volume = globalVolume * vol;
+    audio.play();
     // console.log(ad);
 }
 
