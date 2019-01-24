@@ -19,10 +19,12 @@ function multiPlayer() {
 
 spStart.addEventListener("click", function() {
     singlePlayer();
+    handleStartButton();
 });
 
 mpStart.addEventListener("click", function() {
     multiPlayer();
+    handleStartButton();
 })
 
 aiBt.addEventListener("click", function() {
