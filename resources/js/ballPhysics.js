@@ -49,7 +49,7 @@ var game = {
 };
 
 var ai = {
-    active: true,
+    active: false,
     difficulty: 3,
 }
 
