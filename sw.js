@@ -47,6 +47,10 @@ self.__precacheManifest = [
     "revision": "603d99567189f48d27f2a985a102d6d2"
   },
   {
+    "url": "eksempel/winnerMusic.mp3",
+    "revision": "82aac2119aa4921f3ad25b4dd43e2d30"
+  },
+  {
     "url": "favicon-16x16.png",
     "revision": "260fc3855eae98d0130e98c6192b1419"
   },
@@ -55,8 +59,12 @@ self.__precacheManifest = [
     "revision": "0002c1b2f5b4fcf99da92a6625a21a9a"
   },
   {
+    "url": "font/ZCOOLKuaiLe-Regular.ttf",
+    "revision": "ba97bf8f8d5aa619e2c2d37bca87ab34"
+  },
+  {
     "url": "gulpfile.js",
-    "revision": "510166c77cb27482c8fe5dce9de6f013"
+    "revision": "1ba7fd4f1bc73d759831b69c0b05e325"
   },
   {
     "url": "img/Baech_pong01.svg",
@@ -107,6 +115,42 @@ self.__precacheManifest = [
     "revision": "653806cf861186c5ca1e1ec2239f207c"
   },
   {
+    "url": "resources/audio/basketBall.mp3",
+    "revision": "1f44fa4d3c41ae1ca713558cf9b7485d"
+  },
+  {
+    "url": "resources/audio/basketBall2.mp3",
+    "revision": "c61d55f3e997c9a8f3b513bf031ad44a"
+  },
+  {
+    "url": "resources/audio/bg-music.mp3",
+    "revision": "893fa27defc254c6e375e2badcdb9a58"
+  },
+  {
+    "url": "resources/audio/boing.mp3",
+    "revision": "ae8ea763671fa8d104b840c2ef1506c9"
+  },
+  {
+    "url": "resources/audio/god-fuck.mp3",
+    "revision": "de5f7b86d7682b8c542f39ae6cb3a1c8"
+  },
+  {
+    "url": "resources/audio/goe.mp3",
+    "revision": "98ab1f67622ee8241d9ab7e60e1c2341"
+  },
+  {
+    "url": "resources/audio/pingPongBall.mp3",
+    "revision": "d62f19256400bfdb84fd6c9e7ba54b0c"
+  },
+  {
+    "url": "resources/audio/pop.mp3",
+    "revision": "9cd1cf4a35b87250c7820fc7a32adfa2"
+  },
+  {
+    "url": "resources/audio/winnerMusic.mp3",
+    "revision": "a3f8cebf99648e9c14455fc7474b6753"
+  },
+  {
     "url": "resources/css/main.css",
     "revision": "073f0a671bb800ffb3d7a856f1646823"
   },
@@ -117,6 +161,18 @@ self.__precacheManifest = [
   {
     "url": "resources/css/win.css",
     "revision": "9b8ed03c6454fa03aaf9f8f064ef4a59"
+  },
+  {
+    "url": "resources/font/Raleway-Regular.ttf",
+    "revision": "580d0778ad254335be45bf58bb449f43"
+  },
+  {
+    "url": "resources/font/Raleway-Regular.woff2",
+    "revision": "2075794c8e9e7e48e5fbf1b2313e7adf"
+  },
+  {
+    "url": "resources/font/ZCOOLKuaiLe-Regular.ttf",
+    "revision": "ba97bf8f8d5aa619e2c2d37bca87ab34"
   },
   {
     "url": "resources/img/Baech_pong.png",
@@ -189,10 +245,6 @@ self.__precacheManifest = [
   {
     "url": "safari-pinned-tab.svg",
     "revision": "f46a0ce75ac0a7306571e81929cffb9f"
-  },
-  {
-    "url": "showHide.js",
-    "revision": "6cf4e2dbe79cb6500417b091ea7c689a"
   },
   {
     "url": "sw-register.js",

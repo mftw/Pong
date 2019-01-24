@@ -7,8 +7,9 @@ gulp.task('generate-service-worker', () => {
     //   globDirectory: dist,
       globDirectory: './',
       globPatterns: [
-        '**/*.{html,js,css,img,svg,png}'
+        '**/*.{html,js,css,img,svg,png,mp3,ttf,woff2}'
       ],
+      maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
     //   swDest: `${dist}/sw.js`,
     //   swDest: `${'.'}/sw.js`,
       swDest: `./sw.js`,
