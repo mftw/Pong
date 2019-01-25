@@ -35,50 +35,6 @@ self.__precacheManifest = [
     "revision": "ba97bf8f8d5aa619e2c2d37bca87ab34"
   },
   {
-    "url": "gulpfile.js",
-    "revision": "1ba7fd4f1bc73d759831b69c0b05e325"
-  },
-  {
-    "url": "img/Baech_pong01.svg",
-    "revision": "bf05f3ea0730be7816540020c75f64b4"
-  },
-  {
-    "url": "img/Baech_pong02.svg",
-    "revision": "2654d3f19634275f31533d655a3fc779"
-  },
-  {
-    "url": "img/baneMedPaddles.svg",
-    "revision": "1e3d86640afac094513782bffe6a47f2"
-  },
-  {
-    "url": "img/bg.svg",
-    "revision": "e86a4d4cb78394a674ade51fc04c2d2a"
-  },
-  {
-    "url": "img/Coconutball.svg",
-    "revision": "036c74457ff90cbf4171df250d6d72ec"
-  },
-  {
-    "url": "img/paddle_left.svg",
-    "revision": "3b2fc154a7ba57f17757d395be31808c"
-  },
-  {
-    "url": "img/paddle_right.svg",
-    "revision": "518521253c67e6a6eef921c2a4d184c3"
-  },
-  {
-    "url": "img/win.svg",
-    "revision": "acbb1e87b522391f99addd2e05ac43ed"
-  },
-  {
-    "url": "img/win001.svg",
-    "revision": "89806f3c0aaba1ae4e288236c7ea0e92"
-  },
-  {
-    "url": "img/win01.svg",
-    "revision": "12ab74fa50ec81fab82ee4c7e1292f72"
-  },
-  {
     "url": "index.html",
     "revision": "0b4c60051e330e7eba8253a6c3306b81"
   },
@@ -195,6 +151,10 @@ self.__precacheManifest = [
     "revision": "2ff0267048a31799df084a1295dc7cc3"
   },
   {
+    "url": "resources/js/phoneControls.js",
+    "revision": "2ff0267048a31799dfab4a1295dc7cc3"
+  },
+  {
     "url": "resources/js/paddle-mk-snavs.js",
     "revision": "b2b85729ef74fa82be1e27e2137c2e7f"
   },
@@ -221,10 +181,6 @@ self.__precacheManifest = [
   {
     "url": "sw-register.js",
     "revision": "2805af5dc5383274f9ce09445991e005"
-  },
-  {
-    "url": "sw.org.js",
-    "revision": "69949f5bc0d2a5356f6095e1506ccc24"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();

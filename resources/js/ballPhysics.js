@@ -49,7 +49,9 @@ var game = {
 };
 
 var ai = {
+    // Turns the ai on and off with true and false
     active: true,
+    // The lower the more difficult
     difficulty: 3,
 }
 
